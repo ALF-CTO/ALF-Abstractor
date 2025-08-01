@@ -34,6 +34,10 @@ class SessionManager:
         # Reference images for ALF
         if SESSION_KEYS["REFERENCE_IMAGES"] not in st.session_state:
             st.session_state[SESSION_KEYS["REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Polly
+        if SESSION_KEYS["POLLY_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = []
     
     @staticmethod
     def get_current_page() -> str:
@@ -161,6 +165,11 @@ class SessionManager:
         SessionManager.set_page(PAGES["LANDING"])
     
     @staticmethod
+    def navigate_to_friends():
+        """Navigate to friends page"""
+        SessionManager.set_page(PAGES["FRIENDS"])
+    
+    @staticmethod
     def navigate_to_prompt():
         """Navigate to prompt page"""
         SessionManager.set_page(PAGES["PROMPT"])
@@ -174,6 +183,21 @@ class SessionManager:
     def navigate_to_result():
         """Navigate to result page"""
         SessionManager.set_page(PAGES["RESULT"])
+    
+    @staticmethod
+    def navigate_to_polly_prompt():
+        """Navigate to Polly prompt page"""
+        SessionManager.set_page(PAGES["POLLY_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_polly_generating():
+        """Navigate to Polly generating page"""
+        SessionManager.set_page(PAGES["POLLY_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_polly_result():
+        """Navigate to Polly result page"""
+        SessionManager.set_page(PAGES["POLLY_RESULT"])
     
     @staticmethod
     def has_generated_image() -> bool:
@@ -273,3 +297,72 @@ class SessionManager:
         """
         from utils.reference_loader import ReferenceImageLoader
         return ReferenceImageLoader.get_reference_images_info()
+    
+    @staticmethod
+    def get_polly_reference_images() -> list:
+        """
+        Get the Polly reference images from session state
+        
+        Returns:
+            list: List of Polly reference images
+        """
+        return st.session_state.get(SESSION_KEYS["POLLY_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_polly_reference_image(image: Image.Image):
+        """
+        Add a Polly reference image to the session
+        
+        Args:
+            image (Image.Image): Polly reference image to add
+        """
+        ref_images = SessionManager.get_polly_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_polly_reference_images():
+        """Clear all Polly reference images from session"""
+        st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_polly_reference_images() -> bool:
+        """
+        Check if there are Polly reference images in session
+        
+        Returns:
+            bool: True if there are Polly reference images
+        """
+        return len(SessionManager.get_polly_reference_images()) > 0
+    
+    @staticmethod
+    def load_polly_reference_images_from_folder():
+        """Load Polly reference images from the references/polly folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the polly references folder
+        loaded_images = ReferenceImageLoader.load_polly_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_polly_reference_images_info() -> dict:
+        """
+        Get information about Polly reference images
+        
+        Returns:
+            dict: Information about loaded Polly reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_polly_reference_images_info()

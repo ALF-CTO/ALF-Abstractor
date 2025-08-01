@@ -90,9 +90,13 @@ OPENAI_CONFIG = {
 # Page Navigation States
 PAGES = {
     "LANDING": "landing",
+    "FRIENDS": "friends",
     "PROMPT": "prompt", 
     "GENERATING": "generating",
-    "RESULT": "result"
+    "RESULT": "result",
+    "POLLY_PROMPT": "polly_prompt",
+    "POLLY_GENERATING": "polly_generating", 
+    "POLLY_RESULT": "polly_result"
 }
 
 # Session State Keys
@@ -102,7 +106,8 @@ SESSION_KEYS = {
     "CURRENT_PROMPT": "current_prompt",
     "API_KEY": "api_key",
     "IMAGE_HISTORY": "image_history",
-    "REFERENCE_IMAGES": "reference_images"
+    "REFERENCE_IMAGES": "reference_images",
+    "POLLY_REFERENCE_IMAGES": "polly_reference_images"
 }
 
 # UI Text Constants
@@ -110,8 +115,26 @@ UI_TEXT = {
     "LANDING": {
         "title": "🌌 ALF Abstractor",
         "subtitle": "The Surreal Image Generator for the Abstract Blockchain",
-        "enter_button": "🌀 Enter the Abstractor",
+        "friends_button": "🐊👫 ALF and Friends",
+        "enter_button": "🌀 Solo ALF Images",
         "footer": "You do not summon ALF. He allows himself to be seen."
+    },
+    "FRIENDS": {
+        "title": "🐊👫 ALF and Friends",
+        "subtitle": "Choose a friend to join ALF in his digital adventures",
+        "description": "Select one of ALF's companions for your image generation...",
+        "back_button": "🔙 Back to Landing",
+        "solo_button": "🌀 Solo ALF Images",
+        "clear_button": "🔄 Clear Selection"
+    },
+    "POLLY": {
+        "title": "🐊🐧 ALF & Polly Adventures",
+        "subtitle": "Create magical adventures with ALF and his penguin friend Polly",
+        "description": "Describe the magical adventure ALF and Polly will share...",
+        "generate_button": "🌟 Generate ALF & Polly Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Adventure",
+        "mix_button": "🌀 Mix Adventure"
     },
     "PROMPT": {
         "title": "🧿 What Will ALF Become?",
