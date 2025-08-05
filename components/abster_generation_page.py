@@ -1,6 +1,6 @@
 """
-Polly Generation Page Component for ALF Abstractor
-Where the mystical ALF and Polly image generation happens
+Abster Generation Page Component for ALF Abstractor
+Where the mystical ALF and Abster the Green Penguin of Abstract image generation happens
 """
 
 import streamlit as st
@@ -11,12 +11,12 @@ from utils.helpers import get_random_loading_message, format_error_message
 from utils.session_manager import SessionManager
 from config import UI_TEXT
 
-def render_polly_generation_page():
-    """Render the ALF and Polly image generation page"""
+def render_abster_generation_page():
+    """Render the ALF and Abster image generation page"""
     load_alf_css()
     
     st.markdown(
-        create_title("🌀 ALF & Polly are Manifesting...", "page-header"), 
+        create_title("🌀 ALF & Abster are Manifesting...", "page-header"), 
         unsafe_allow_html=True
     )
     
@@ -34,13 +34,13 @@ def render_polly_generation_page():
         
         # Show current prompt
         if current_prompt:
-            st.info(f"**Adventure prompt:** {current_prompt}")
+            st.info(f"**Abstract adventure prompt:** {current_prompt}")
         
         # Show reference images if available
         alf_ref_images = SessionManager.get_reference_images()
-        polly_ref_images = SessionManager.get_polly_reference_images()
+        abster_ref_images = SessionManager.get_abster_reference_images()
         
-        if alf_ref_images or polly_ref_images:
+        if alf_ref_images or abster_ref_images:
             st.markdown("**🖼️ Using Reference Images:**")
             
             col_gen_ref1, col_gen_ref2 = st.columns(2)
@@ -52,34 +52,34 @@ def render_polly_generation_page():
                         st.image(img, caption=f"ALF Ref {i+1}", use_column_width=True)
             
             with col_gen_ref2:
-                if polly_ref_images:
-                    st.markdown("**🐧 Polly References:**")
-                    for i, img in enumerate(polly_ref_images[-2:]):  # Show last 2 Polly
-                        st.image(img, caption=f"Polly Ref {i+1}", use_column_width=True)
+                if abster_ref_images:
+                    st.markdown("**🐧 Abster References:**")
+                    for i, img in enumerate(abster_ref_images[-2:]):  # Show last 2 Abster
+                        st.image(img, caption=f"Abster Ref {i+1}", use_column_width=True)
         
         # Generation button
         if api_key and current_prompt:
-            if st.button("Generate ALF & Polly Adventure"):
-                _generate_polly_image(api_key, current_prompt)
+            if st.button("Generate ALF & Abster Adventure"):
+                _generate_abster_image(api_key, current_prompt)
         
         # Navigation buttons
         col_nav1, col_nav2 = st.columns(2)
         
         with col_nav1:
             if st.button("🔙 Back to Prompt"):
-                SessionManager.navigate_to_polly_prompt()
+                SessionManager.navigate_to_abster_prompt()
                 st.rerun()
         
         with col_nav2:
             # Show result button if image exists
             if SessionManager.has_generated_image():
                 if st.button("🎭 View Adventure"):
-                    SessionManager.navigate_to_polly_result()
+                    SessionManager.navigate_to_abster_result()
                     st.rerun()
 
-def _generate_polly_image(api_key: str, prompt: str):
+def _generate_abster_image(api_key: str, prompt: str):
     """
-    Generate ALF and Polly image using the provided API key and prompt
+    Generate ALF and Abster image using the provided API key and prompt
     
     Args:
         api_key (str): OpenAI API key
@@ -96,12 +96,12 @@ def _generate_polly_image(api_key: str, prompt: str):
         
         # Show mystical loading message
         loading_messages = [
-            "🐊🐧 ALF and Polly are preparing their adventure...",
-            "❄️ Creating magical ice crystals...", 
-            "🌈 Painting pink penguin feathers...",
-            "🏔️ Building enchanted ice kingdoms...",
-            "✨ Weaving friendship magic...",
-            "🎨 Mixing crocodile green with penguin pink..."
+            "🐊🐧 ALF and Abster are preparing their abstract adventure...",
+            "🌌 Creating mystical abstract patterns...", 
+            "💚 Painting green penguin feathers...",
+            "🎨 Building geometric realms...",
+            "✨ Weaving abstract magic...",
+            "🔮 Mixing crocodile green with abstract geometry..."
         ]
         
         import random
@@ -111,26 +111,26 @@ def _generate_polly_image(api_key: str, prompt: str):
             # Add some mystical delay for effect
             time.sleep(1)
             
-            # Enhance prompt specifically for ALF and Polly
-            polly_enhanced_prompt = _enhance_polly_prompt(prompt)
+            # Enhance prompt specifically for ALF and Abster
+            abster_enhanced_prompt = _enhance_abster_prompt(prompt)
             
-            # Get both ALF and Polly reference images
+            # Get both ALF and Abster reference images
             alf_reference_images = SessionManager.get_reference_images()
-            polly_reference_images = SessionManager.get_polly_reference_images()
+            abster_reference_images = SessionManager.get_abster_reference_images()
             
             # Combine both reference sets for generation
             all_reference_images = []
             if alf_reference_images:
                 all_reference_images.extend(alf_reference_images)
-            if polly_reference_images:
-                all_reference_images.extend(polly_reference_images)
+            if abster_reference_images:
+                all_reference_images.extend(abster_reference_images)
             
             if all_reference_images:
                 # Use the edit endpoint with combined reference images for better fidelity
-                image, enhanced_prompt = generator.generate_image_with_reference_files(polly_enhanced_prompt, all_reference_images)
+                image, enhanced_prompt = generator.generate_image_with_reference_files(abster_enhanced_prompt, all_reference_images)
             else:
                 # Use regular generation without references
-                image, enhanced_prompt = generator.generate_image(polly_enhanced_prompt, False)
+                image, enhanced_prompt = generator.generate_image(abster_enhanced_prompt, False)
             
             # Store in session state
             SessionManager.set_generated_image(image)
@@ -140,7 +140,7 @@ def _generate_polly_image(api_key: str, prompt: str):
             st.session_state["generation_timestamp"] = time.time()
             
             # Navigate to result page
-            SessionManager.navigate_to_polly_result()
+            SessionManager.navigate_to_abster_result()
             st.rerun()
             
     except ImageGenerationError as e:
@@ -149,20 +149,21 @@ def _generate_polly_image(api_key: str, prompt: str):
         error_msg = format_error_message(e)
         st.error(error_msg)
 
-def _enhance_polly_prompt(user_prompt: str) -> str:
+def _enhance_abster_prompt(user_prompt: str) -> str:
     """
-    Enhance user prompt with Polly-specific styling and context
+    Enhance user prompt with Abster-specific styling and context
     
     Args:
         user_prompt (str): User's original prompt
         
     Returns:
-        str: Enhanced prompt with Polly styling
+        str: Enhanced prompt with Abster styling
     """
     
-    polly_context = (
-    "Polly is a cheerful pink penguin with a friendly expression, cute round features, and a distinct pink body. "
-    "She is wearing a playful accessory (like a scarf or hat) as seen in her reference image. "
+    abster_context = (
+    "Abster is a cheerful green and white cartoon penguin with smooth, rounded features, "
+    "a small orange beak, and expressive black eyes. His design is simple, cute, and clean, "
+    "with a friendly, thoughtful expression. His green color is distinct and should match the reference image exactly. "
     )
 
     alf_context = (
@@ -171,19 +172,20 @@ def _enhance_polly_prompt(user_prompt: str) -> str:
     )
 
     combined_reference_instruction = (
-    "Use both Polly and ALF’s reference images to accurately represent their appearance. "
-    "Ensure Polly and ALF appear together in the scene described below, interacting naturally. "
+    "Use both Abster and ALF's reference images to accurately represent their appearance. "
+    "Ensure Abster and ALF appear together in the scene described below, interacting naturally. "
     )
 
-    user_scene = user_prompt  # Example: "exploring a glowing jungle with magical plants"
+    user_scene = user_prompt  # Example: "exploring geometric landscapes with floating abstract shapes"
+
 
     enhanced_prompt = (
-    f"{polly_context}{alf_context}{combined_reference_instruction} "
-    f"The scene shows Polly and ALF {user_scene}. "
-    "Both characters have whimsical, cartoon-style proportions and friendly expressions. "
-    "High-quality digital illustration with soft shading and warm lighting. "
-    "Colorful, magical atmosphere that emphasizes their friendship and shared adventure. "
-    "Render them side by side, clearly visible, and actively engaged in the scene."
-    )
+    f"{abster_context}{alf_context}{combined_reference_instruction} "
+    f"The scene shows Abster and ALF {user_scene}. "
+    "Abster retains his smooth, cute cartoon style, while ALF maintains his tech-themed appearance. "
+    "High-quality digital illustration with soft shading and creative lighting. "
+    "The scene should have a whimsical, imaginative atmosphere that highlights their friendship and shared adventure. "
+    "Render both characters side by side, clearly visible, and actively engaged in the described scene. "
+)
     
-    return enhanced_prompt 
+    return enhanced_prompt

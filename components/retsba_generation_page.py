@@ -1,6 +1,6 @@
 """
-Polly Generation Page Component for ALF Abstractor
-Where the mystical ALF and Polly image generation happens
+Retsba Generation Page Component for ALF Abstractor
+Where the mystical ALF and Retsba the Red Penguin villain image generation happens
 """
 
 import streamlit as st
@@ -11,12 +11,12 @@ from utils.helpers import get_random_loading_message, format_error_message
 from utils.session_manager import SessionManager
 from config import UI_TEXT
 
-def render_polly_generation_page():
-    """Render the ALF and Polly image generation page"""
+def render_retsba_generation_page():
+    """Render the ALF and Retsba image generation page"""
     load_alf_css()
     
     st.markdown(
-        create_title("🌀 ALF & Polly are Manifesting...", "page-header"), 
+        create_title("🌀 ALF & Retsba are Scheming...", "page-header"), 
         unsafe_allow_html=True
     )
     
@@ -34,13 +34,13 @@ def render_polly_generation_page():
         
         # Show current prompt
         if current_prompt:
-            st.info(f"**Adventure prompt:** {current_prompt}")
+            st.info(f"**Villainous adventure prompt:** {current_prompt}")
         
         # Show reference images if available
         alf_ref_images = SessionManager.get_reference_images()
-        polly_ref_images = SessionManager.get_polly_reference_images()
+        retsba_ref_images = SessionManager.get_retsba_reference_images()
         
-        if alf_ref_images or polly_ref_images:
+        if alf_ref_images or retsba_ref_images:
             st.markdown("**🖼️ Using Reference Images:**")
             
             col_gen_ref1, col_gen_ref2 = st.columns(2)
@@ -52,34 +52,34 @@ def render_polly_generation_page():
                         st.image(img, caption=f"ALF Ref {i+1}", use_column_width=True)
             
             with col_gen_ref2:
-                if polly_ref_images:
-                    st.markdown("**🐧 Polly References:**")
-                    for i, img in enumerate(polly_ref_images[-2:]):  # Show last 2 Polly
-                        st.image(img, caption=f"Polly Ref {i+1}", use_column_width=True)
+                if retsba_ref_images:
+                    st.markdown("**🐧 Retsba References:**")
+                    for i, img in enumerate(retsba_ref_images[-2:]):  # Show last 2 Retsba
+                        st.image(img, caption=f"Retsba Ref {i+1}", use_column_width=True)
         
         # Generation button
         if api_key and current_prompt:
-            if st.button("Generate ALF & Polly Adventure"):
-                _generate_polly_image(api_key, current_prompt)
+            if st.button("Generate ALF & Retsba Adventure"):
+                _generate_retsba_image(api_key, current_prompt)
         
         # Navigation buttons
         col_nav1, col_nav2 = st.columns(2)
         
         with col_nav1:
             if st.button("🔙 Back to Prompt"):
-                SessionManager.navigate_to_polly_prompt()
+                SessionManager.navigate_to_retsba_prompt()
                 st.rerun()
         
         with col_nav2:
             # Show result button if image exists
             if SessionManager.has_generated_image():
                 if st.button("🎭 View Adventure"):
-                    SessionManager.navigate_to_polly_result()
+                    SessionManager.navigate_to_retsba_result()
                     st.rerun()
 
-def _generate_polly_image(api_key: str, prompt: str):
+def _generate_retsba_image(api_key: str, prompt: str):
     """
-    Generate ALF and Polly image using the provided API key and prompt
+    Generate ALF and Retsba image using the provided API key and prompt
     
     Args:
         api_key (str): OpenAI API key
@@ -96,12 +96,12 @@ def _generate_polly_image(api_key: str, prompt: str):
         
         # Show mystical loading message
         loading_messages = [
-            "🐊🐧 ALF and Polly are preparing their adventure...",
-            "❄️ Creating magical ice crystals...", 
-            "🌈 Painting pink penguin feathers...",
-            "🏔️ Building enchanted ice kingdoms...",
-            "✨ Weaving friendship magic...",
-            "🎨 Mixing crocodile green with penguin pink..."
+            "🐊🐧 ALF and Retsba are plotting their villainous adventure...",
+            "🔴 Creating sinister red abstractions...", 
+            "🌋 Painting the most villainous red feathers...",
+            "⚡ Building chaotic red dimensions...",
+            "✨ Weaving dark abstract magic...",
+            "🎨 Mixing crocodile green with villainous red..."
         ]
         
         import random
@@ -111,26 +111,26 @@ def _generate_polly_image(api_key: str, prompt: str):
             # Add some mystical delay for effect
             time.sleep(1)
             
-            # Enhance prompt specifically for ALF and Polly
-            polly_enhanced_prompt = _enhance_polly_prompt(prompt)
+            # Enhance prompt specifically for ALF and Retsba
+            retsba_enhanced_prompt = _enhance_retsba_prompt(prompt)
             
-            # Get both ALF and Polly reference images
+            # Get both ALF and Retsba reference images
             alf_reference_images = SessionManager.get_reference_images()
-            polly_reference_images = SessionManager.get_polly_reference_images()
+            retsba_reference_images = SessionManager.get_retsba_reference_images()
             
             # Combine both reference sets for generation
             all_reference_images = []
             if alf_reference_images:
                 all_reference_images.extend(alf_reference_images)
-            if polly_reference_images:
-                all_reference_images.extend(polly_reference_images)
+            if retsba_reference_images:
+                all_reference_images.extend(retsba_reference_images)
             
             if all_reference_images:
                 # Use the edit endpoint with combined reference images for better fidelity
-                image, enhanced_prompt = generator.generate_image_with_reference_files(polly_enhanced_prompt, all_reference_images)
+                image, enhanced_prompt = generator.generate_image_with_reference_files(retsba_enhanced_prompt, all_reference_images)
             else:
                 # Use regular generation without references
-                image, enhanced_prompt = generator.generate_image(polly_enhanced_prompt, False)
+                image, enhanced_prompt = generator.generate_image(retsba_enhanced_prompt, False)
             
             # Store in session state
             SessionManager.set_generated_image(image)
@@ -140,7 +140,7 @@ def _generate_polly_image(api_key: str, prompt: str):
             st.session_state["generation_timestamp"] = time.time()
             
             # Navigate to result page
-            SessionManager.navigate_to_polly_result()
+            SessionManager.navigate_to_retsba_result()
             st.rerun()
             
     except ImageGenerationError as e:
@@ -149,20 +149,22 @@ def _generate_polly_image(api_key: str, prompt: str):
         error_msg = format_error_message(e)
         st.error(error_msg)
 
-def _enhance_polly_prompt(user_prompt: str) -> str:
+def _enhance_retsba_prompt(user_prompt: str) -> str:
     """
-    Enhance user prompt with Polly-specific styling and context
+    Enhance user prompt with Retsba-specific styling and context
     
     Args:
         user_prompt (str): User's original prompt
         
     Returns:
-        str: Enhanced prompt with Polly styling
+        str: Enhanced prompt with Retsba styling
     """
     
-    polly_context = (
-    "Polly is a cheerful pink penguin with a friendly expression, cute round features, and a distinct pink body. "
-    "She is wearing a playful accessory (like a scarf or hat) as seen in her reference image. "
+    retsba_context = (
+    "Retsba is a bold red cartoon penguin with crimson feathers, a white belly, a blue beak, and thick black eyebrows. "
+    "He has an intense, determined expression with a serious and competitive attitude. "
+    "His appearance is clean, strong, and striking, with sharp contrast and a powerful stance. "
+    "Retsba’s look should match the reference image exactly, with bright red coloring and cartoon proportions. "
     )
 
     alf_context = (
@@ -171,19 +173,19 @@ def _enhance_polly_prompt(user_prompt: str) -> str:
     )
 
     combined_reference_instruction = (
-    "Use both Polly and ALF’s reference images to accurately represent their appearance. "
-    "Ensure Polly and ALF appear together in the scene described below, interacting naturally. "
+    "Use both Retsba and ALF's reference images to accurately represent their appearance. "
+    "Ensure Retsba and ALF appear together in the scene described below, with Retsba showing his villainous nature. "
     )
 
-    user_scene = user_prompt  # Example: "exploring a glowing jungle with magical plants"
+    user_scene = user_prompt  # Example: "battling through chaotic red abstract dimensions"
 
     enhanced_prompt = (
-    f"{polly_context}{alf_context}{combined_reference_instruction} "
-    f"The scene shows Polly and ALF {user_scene}. "
-    "Both characters have whimsical, cartoon-style proportions and friendly expressions. "
-    "High-quality digital illustration with soft shading and warm lighting. "
-    "Colorful, magical atmosphere that emphasizes their friendship and shared adventure. "
-    "Render them side by side, clearly visible, and actively engaged in the scene."
+    f"{retsba_context}{alf_context}{combined_reference_instruction} "
+    f"The scene shows Retsba and ALF {user_scene}. "
+    "Retsba maintains his bold, serious cartoon style with vivid red coloring, and ALF retains his tech-themed friendly appearance. "
+    "High-quality digital illustration with dramatic lighting, rich colors, and stylized cartoon shading. "
+    "Energetic, competitive atmosphere that emphasizes the contrast between Retsba’s intensity and ALF’s friendly confidence. "
+    "Render both characters clearly visible, side by side or in active conflict, fully engaged in the described scene."
     )
     
-    return enhanced_prompt 
+    return enhanced_prompt

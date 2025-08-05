@@ -38,6 +38,18 @@ class SessionManager:
         # Reference images for Polly
         if SESSION_KEYS["POLLY_REFERENCE_IMAGES"] not in st.session_state:
             st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Abster
+        if SESSION_KEYS["ABSTER_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["ABSTER_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for GOONER
+        if SESSION_KEYS["GOONER_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["GOONER_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Retsba
+        if SESSION_KEYS["RETSBA_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = []
     
     @staticmethod
     def get_current_page() -> str:
@@ -198,6 +210,51 @@ class SessionManager:
     def navigate_to_polly_result():
         """Navigate to Polly result page"""
         SessionManager.set_page(PAGES["POLLY_RESULT"])
+    
+    @staticmethod
+    def navigate_to_abster_prompt():
+        """Navigate to Abster prompt page"""
+        SessionManager.set_page(PAGES["ABSTER_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_abster_generating():
+        """Navigate to Abster generating page"""
+        SessionManager.set_page(PAGES["ABSTER_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_abster_result():
+        """Navigate to Abster result page"""
+        SessionManager.set_page(PAGES["ABSTER_RESULT"])
+    
+    @staticmethod
+    def navigate_to_gooner_prompt():
+        """Navigate to GOONER prompt page"""
+        SessionManager.set_page(PAGES["GOONER_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_gooner_generating():
+        """Navigate to GOONER generating page"""
+        SessionManager.set_page(PAGES["GOONER_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_gooner_result():
+        """Navigate to GOONER result page"""
+        SessionManager.set_page(PAGES["GOONER_RESULT"])
+    
+    @staticmethod
+    def navigate_to_retsba_prompt():
+        """Navigate to Retsba prompt page"""
+        SessionManager.set_page(PAGES["RETSBA_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_retsba_generating():
+        """Navigate to Retsba generating page"""
+        SessionManager.set_page(PAGES["RETSBA_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_retsba_result():
+        """Navigate to Retsba result page"""
+        SessionManager.set_page(PAGES["RETSBA_RESULT"])
     
     @staticmethod
     def has_generated_image() -> bool:
@@ -366,3 +423,210 @@ class SessionManager:
         """
         from utils.reference_loader import ReferenceImageLoader
         return ReferenceImageLoader.get_polly_reference_images_info()
+    
+    @staticmethod
+    def get_abster_reference_images() -> list:
+        """
+        Get the Abster reference images from session state
+        
+        Returns:
+            list: List of Abster reference images
+        """
+        return st.session_state.get(SESSION_KEYS["ABSTER_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_abster_reference_image(image: Image.Image):
+        """
+        Add an Abster reference image to the session
+        
+        Args:
+            image (Image.Image): Abster reference image to add
+        """
+        ref_images = SessionManager.get_abster_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["ABSTER_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_abster_reference_images():
+        """Clear all Abster reference images from session"""
+        st.session_state[SESSION_KEYS["ABSTER_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_abster_reference_images() -> bool:
+        """
+        Check if there are Abster reference images in session
+        
+        Returns:
+            bool: True if there are Abster reference images
+        """
+        return len(SessionManager.get_abster_reference_images()) > 0
+    
+    @staticmethod
+    def load_abster_reference_images_from_folder():
+        """Load Abster reference images from the references/abster folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the abster references folder
+        loaded_images = ReferenceImageLoader.load_abster_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["ABSTER_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_abster_reference_images_info() -> dict:
+        """
+        Get information about Abster reference images
+        
+        Returns:
+            dict: Information about loaded Abster reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_abster_reference_images_info()
+    
+    @staticmethod
+    def get_gooner_reference_images() -> list:
+        """
+        Get the GOONER reference images from session state
+        
+        Returns:
+            list: List of GOONER reference images
+        """
+        return st.session_state.get(SESSION_KEYS["GOONER_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_gooner_reference_image(image: Image.Image):
+        """
+        Add a GOONER reference image to the session
+        
+        Args:
+            image (Image.Image): GOONER reference image to add
+        """
+        ref_images = SessionManager.get_gooner_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["GOONER_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_gooner_reference_images():
+        """Clear all GOONER reference images from session"""
+        st.session_state[SESSION_KEYS["GOONER_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_gooner_reference_images() -> bool:
+        """
+        Check if there are GOONER reference images in session
+        
+        Returns:
+            bool: True if there are GOONER reference images
+        """
+        return len(SessionManager.get_gooner_reference_images()) > 0
+    
+    @staticmethod
+    def load_gooner_reference_images_from_folder():
+        """Load GOONER reference images from the references/gooner folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the gooner references folder
+        loaded_images = ReferenceImageLoader.load_gooner_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["GOONER_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_gooner_reference_images_info() -> dict:
+        """
+        Get information about GOONER reference images
+        
+        Returns:
+            dict: Information about loaded GOONER reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_gooner_reference_images_info()
+    
+    @staticmethod
+    def get_retsba_reference_images() -> list:
+        """
+        Get the Retsba reference images from session state
+        
+        Returns:
+            list: List of Retsba reference images
+        """
+        return st.session_state.get(SESSION_KEYS["RETSBA_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_retsba_reference_image(image: Image.Image):
+        """
+        Add a Retsba reference image to the session
+        
+        Args:
+            image (Image.Image): Retsba reference image to add
+        """
+        ref_images = SessionManager.get_retsba_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_retsba_reference_images():
+        """Clear all Retsba reference images from session"""
+        st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_retsba_reference_images() -> bool:
+        """
+        Check if there are Retsba reference images in session
+        
+        Returns:
+            bool: True if there are Retsba reference images
+        """
+        return len(SessionManager.get_retsba_reference_images()) > 0
+    
+    @staticmethod
+    def load_retsba_reference_images_from_folder():
+        """Load Retsba reference images from the references/retsba folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the retsba references folder
+        loaded_images = ReferenceImageLoader.load_retsba_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_retsba_reference_images_info() -> dict:
+        """
+        Get information about Retsba reference images
+        
+        Returns:
+            dict: Information about loaded Retsba reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_retsba_reference_images_info()

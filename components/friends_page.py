@@ -17,6 +17,30 @@ FRIENDS = {
         "species": "penguin",
         "personality": "cheerful and playful",
         "emoji": "🐧"
+    },
+    "abster": {
+        "name": "Abster",
+        "description": "The Green Penguin of Abstract",
+        "color": "green",
+        "species": "penguin",
+        "personality": "thoughtful and artistic",
+        "emoji": "🐧"
+    },
+    "gooner": {
+        "name": "GOONER",
+        "description": "The bluest Penguin there is",
+        "color": "blue",
+        "species": "penguin",
+        "personality": "energetic and blue",
+        "emoji": "🐧"
+    },
+    "retsba": {
+        "name": "Retsba",
+        "description": "The villain of Abstract",
+        "color": "red",
+        "species": "penguin",
+        "personality": "villainous and cunning",
+        "emoji": "🐧"
     }
 }
 
@@ -60,6 +84,15 @@ def render_friends_page():
                     # Navigate directly to the friend's dedicated page flow
                     if friend_key == "polly":
                         SessionManager.navigate_to_polly_prompt()
+                        st.rerun()
+                    elif friend_key == "abster":
+                        SessionManager.navigate_to_abster_prompt()
+                        st.rerun()
+                    elif friend_key == "gooner":
+                        SessionManager.navigate_to_gooner_prompt()
+                        st.rerun()
+                    elif friend_key == "retsba":
+                        SessionManager.navigate_to_retsba_prompt()
                         st.rerun()
         
         st.info("👆 Click on a friend above to start creating adventures together!")

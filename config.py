@@ -96,7 +96,16 @@ PAGES = {
     "RESULT": "result",
     "POLLY_PROMPT": "polly_prompt",
     "POLLY_GENERATING": "polly_generating", 
-    "POLLY_RESULT": "polly_result"
+    "POLLY_RESULT": "polly_result",
+    "ABSTER_PROMPT": "abster_prompt",
+    "ABSTER_GENERATING": "abster_generating",
+    "ABSTER_RESULT": "abster_result",
+    "GOONER_PROMPT": "gooner_prompt",
+    "GOONER_GENERATING": "gooner_generating",
+    "GOONER_RESULT": "gooner_result",
+    "RETSBA_PROMPT": "retsba_prompt",
+    "RETSBA_GENERATING": "retsba_generating",
+    "RETSBA_RESULT": "retsba_result"
 }
 
 # Session State Keys
@@ -107,7 +116,10 @@ SESSION_KEYS = {
     "API_KEY": "api_key",
     "IMAGE_HISTORY": "image_history",
     "REFERENCE_IMAGES": "reference_images",
-    "POLLY_REFERENCE_IMAGES": "polly_reference_images"
+    "POLLY_REFERENCE_IMAGES": "polly_reference_images",
+    "ABSTER_REFERENCE_IMAGES": "abster_reference_images",
+    "GOONER_REFERENCE_IMAGES": "gooner_reference_images",
+    "RETSBA_REFERENCE_IMAGES": "retsba_reference_images"
 }
 
 # UI Text Constants
@@ -135,6 +147,33 @@ UI_TEXT = {
         "back_button": "🔙 Back to Friends",
         "random_button": "🎲 Random Adventure",
         "mix_button": "🌀 Mix Adventure"
+    },
+    "ABSTER": {
+        "title": "🐊🐧 ALF & Abster Abstract Adventures",
+        "subtitle": "Create abstract adventures with ALF and Abster the Green Penguin of Abstract",
+        "description": "Describe the abstract adventure ALF and Abster will create...",
+        "generate_button": "🌟 Generate ALF & Abster Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Abstract Adventure",
+        "mix_button": "🌀 Mix Abstract Adventure"
+    },
+    "GOONER": {
+        "title": "🐊🐧 ALF & GOONER Blue Adventures",
+        "subtitle": "Create blue adventures with ALF and GOONER the bluest Penguin there is",
+        "description": "Describe the blue adventure ALF and GOONER will experience...",
+        "generate_button": "🌟 Generate ALF & GOONER Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Blue Adventure",
+        "mix_button": "🌀 Mix Blue Adventure"
+    },
+    "RETSBA": {
+        "title": "🐊🐧 ALF & Retsba Villainous Adventures",
+        "subtitle": "Create villainous adventures with ALF and Retsba the villain of Abstract",
+        "description": "Describe the villainous adventure ALF and Retsba will encounter...",
+        "generate_button": "🌟 Generate ALF & Retsba Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Villainous Adventure",
+        "mix_button": "🌀 Mix Villainous Adventure"
     },
     "PROMPT": {
         "title": "🧿 What Will ALF Become?",
