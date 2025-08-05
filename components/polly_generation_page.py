@@ -162,7 +162,7 @@ def _enhance_polly_prompt(user_prompt: str) -> str:
     
     polly_context = (
     "Polly is a cheerful pink penguin with a friendly expression, cute round features, and a distinct pink body. "
-    "She is wearing a playful accessory (like a scarf or hat) as seen in her reference image. "
+    "She is as seen in her reference image. "
     )
 
     alf_context = (
