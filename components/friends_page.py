@@ -41,6 +41,22 @@ FRIENDS = {
         "species": "penguin",
         "personality": "villainous and cunning",
         "emoji": "🐧"
+    },
+    "beary": {
+        "name": "Beary",
+        "description": "Number 1 prankster in abstract chain",
+        "color": "brown",
+        "species": "bear",
+        "personality": "playful and mischievous",
+        "emoji": "🐻"
+    },
+    "god": {
+        "name": "GOD",
+        "description": "The Dyslexic Dog in Abstract",
+        "color": "golden",
+        "species": "dog",
+        "personality": "dyslexic and golden-hearted",
+        "emoji": "🐕"
     }
 }
 
@@ -93,6 +109,12 @@ def render_friends_page():
                         st.rerun()
                     elif friend_key == "retsba":
                         SessionManager.navigate_to_retsba_prompt()
+                        st.rerun()
+                    elif friend_key == "beary":
+                        SessionManager.navigate_to_beary_prompt()
+                        st.rerun()
+                    elif friend_key == "god":
+                        SessionManager.navigate_to_god_prompt()
                         st.rerun()
         
         st.info("👆 Click on a friend above to start creating adventures together!")

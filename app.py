@@ -31,6 +31,12 @@ from components.gooner_result_page import render_gooner_result_page, render_goon
 from components.retsba_prompt_page import render_retsba_prompt_page
 from components.retsba_generation_page import render_retsba_generation_page
 from components.retsba_result_page import render_retsba_result_page, render_retsba_image_history
+from components.beary_prompt_page import render_beary_prompt_page
+from components.beary_generation_page import render_beary_generation_page
+from components.beary_result_page import render_beary_result_page, render_beary_image_history
+from components.god_prompt_page import render_god_prompt_page
+from components.god_generation_page import render_god_generation_page
+from components.god_result_page import render_god_result_page, render_god_image_history
 
 def configure_app():
     """Configure the Streamlit application"""
@@ -61,6 +67,10 @@ def main():
             num_gooner_loaded = SessionManager.load_gooner_reference_images_from_folder()
         with st.spinner("🐧 Loading Retsba reference images..."):
             num_retsba_loaded = SessionManager.load_retsba_reference_images_from_folder()
+        with st.spinner("🐻 Loading Beary reference images..."):
+            num_beary_loaded = SessionManager.load_beary_reference_images_from_folder()
+        with st.spinner("🐕 Loading GOD reference images..."):
+            num_god_loaded = SessionManager.load_god_reference_images_from_folder()
         st.session_state["references_loaded"] = True
     
     # Get current page from session
@@ -111,6 +121,22 @@ def main():
         render_retsba_result_page()
         # Optionally show Retsba image history in sidebar or expandable section
         render_retsba_image_history()
+    elif current_page == PAGES["BEARY_PROMPT"]:
+        render_beary_prompt_page()
+    elif current_page == PAGES["BEARY_GENERATING"]:
+        render_beary_generation_page()
+    elif current_page == PAGES["BEARY_RESULT"]:
+        render_beary_result_page()
+        # Optionally show Beary image history in sidebar or expandable section
+        render_beary_image_history()
+    elif current_page == PAGES["GOD_PROMPT"]:
+        render_god_prompt_page()
+    elif current_page == PAGES["GOD_GENERATING"]:
+        render_god_generation_page()
+    elif current_page == PAGES["GOD_RESULT"]:
+        render_god_result_page()
+        # Optionally show GOD image history in sidebar or expandable section
+        render_god_image_history()
     else:
         # Fallback to landing page if invalid page
         SessionManager.set_page(PAGES["LANDING"])

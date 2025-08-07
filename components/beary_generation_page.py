@@ -1,6 +1,6 @@
 """
-Polly Generation Page Component for ALF Abstractor
-Where the mystical ALF and Polly image generation happens
+Beary Generation Page Component for ALF Abstractor
+Where the mystical ALF and Beary the Brown Bear prankster image generation happens
 """
 
 import streamlit as st
@@ -11,12 +11,12 @@ from utils.helpers import get_random_loading_message, format_error_message
 from utils.session_manager import SessionManager
 from config import UI_TEXT
 
-def render_polly_generation_page():
-    """Render the ALF and Polly image generation page"""
+def render_beary_generation_page():
+    """Render the ALF and Beary image generation page"""
     load_alf_css()
     
     st.markdown(
-        create_title("🌀 ALF & Polly are Manifesting...", "page-header"), 
+        create_title("🌀 ALF & Beary are Pranking...", "page-header"), 
         unsafe_allow_html=True
     )
     
@@ -34,13 +34,13 @@ def render_polly_generation_page():
         
         # Show current prompt
         if current_prompt:
-            st.info(f"**Adventure prompt:** {current_prompt}")
+            st.info(f"**Prankster adventure prompt:** {current_prompt}")
         
         # Show reference images if available
         alf_ref_images = SessionManager.get_reference_images()
-        polly_ref_images = SessionManager.get_polly_reference_images()
+        beary_ref_images = SessionManager.get_beary_reference_images()
         
-        if alf_ref_images or polly_ref_images:
+        if alf_ref_images or beary_ref_images:
             st.markdown("**🖼️ Using Reference Images:**")
             
             col_gen_ref1, col_gen_ref2 = st.columns(2)
@@ -52,34 +52,34 @@ def render_polly_generation_page():
                         st.image(img, caption=f"ALF Ref {i+1}", use_column_width=True)
             
             with col_gen_ref2:
-                if polly_ref_images:
-                    st.markdown("**🐧 Polly References:**")
-                    for i, img in enumerate(polly_ref_images[-2:]):  # Show last 2 Polly
-                        st.image(img, caption=f"Polly Ref {i+1}", use_column_width=True)
+                if beary_ref_images:
+                    st.markdown("**🐻 Beary References:**")
+                    for i, img in enumerate(beary_ref_images[-2:]):  # Show last 2 Beary
+                        st.image(img, caption=f"Beary Ref {i+1}", use_column_width=True)
         
         # Generation button
         if api_key and current_prompt:
-            if st.button("Generate ALF & Polly Adventure"):
-                _generate_polly_image(api_key, current_prompt)
+            if st.button("Generate ALF & Beary Adventure"):
+                _generate_beary_image(api_key, current_prompt)
         
         # Navigation buttons
         col_nav1, col_nav2 = st.columns(2)
         
         with col_nav1:
             if st.button("🔙 Back to Prompt"):
-                SessionManager.navigate_to_polly_prompt()
+                SessionManager.navigate_to_beary_prompt()
                 st.rerun()
         
         with col_nav2:
             # Show result button if image exists
             if SessionManager.has_generated_image():
                 if st.button("🎭 View Adventure"):
-                    SessionManager.navigate_to_polly_result()
+                    SessionManager.navigate_to_beary_result()
                     st.rerun()
 
-def _generate_polly_image(api_key: str, prompt: str):
+def _generate_beary_image(api_key: str, prompt: str):
     """
-    Generate ALF and Polly image using the provided API key and prompt
+    Generate ALF and Beary image using the provided API key and prompt
     
     Args:
         api_key (str): OpenAI API key
@@ -96,12 +96,12 @@ def _generate_polly_image(api_key: str, prompt: str):
         
         # Show mystical loading message
         loading_messages = [
-            "🐊🐧 ALF and Polly are preparing their adventure...",
-            "❄️ Creating magical ice crystals...", 
-            "🌈 Painting pink penguin feathers...",
-            "🏔️ Building enchanted ice kingdoms...",
-            "✨ Weaving friendship magic...",
-            "🎨 Mixing crocodile green with penguin pink..."
+            "🐊🐻 ALF and Beary are setting up their next prank...",
+            "🤡 Creating the most hilarious brown comedy...", 
+            "🎪 Painting mischievous bear fur...",
+            "🎯 Building elaborate prank setups...",
+            "✨ Weaving comedy magic...",
+            "🎨 Mixing crocodile green with prankster brown..."
         ]
         
         import random
@@ -111,26 +111,26 @@ def _generate_polly_image(api_key: str, prompt: str):
             # Add some mystical delay for effect
             time.sleep(1)
             
-            # Enhance prompt specifically for ALF and Polly
-            polly_enhanced_prompt = _enhance_polly_prompt(prompt)
+            # Enhance prompt specifically for ALF and Beary
+            beary_enhanced_prompt = _enhance_beary_prompt(prompt)
             
-            # Get both ALF and Polly reference images
+            # Get both ALF and Beary reference images
             alf_reference_images = SessionManager.get_reference_images()
-            polly_reference_images = SessionManager.get_polly_reference_images()
+            beary_reference_images = SessionManager.get_beary_reference_images()
             
             # Combine both reference sets for generation
             all_reference_images = []
             if alf_reference_images:
                 all_reference_images.extend(alf_reference_images)
-            if polly_reference_images:
-                all_reference_images.extend(polly_reference_images)
+            if beary_reference_images:
+                all_reference_images.extend(beary_reference_images)
             
             if all_reference_images:
                 # Use the edit endpoint with combined reference images for better fidelity
-                image, enhanced_prompt = generator.generate_image_with_reference_files(polly_enhanced_prompt, all_reference_images)
+                image, enhanced_prompt = generator.generate_image_with_reference_files(beary_enhanced_prompt, all_reference_images)
             else:
                 # Use regular generation without references
-                image, enhanced_prompt = generator.generate_image(polly_enhanced_prompt, False)
+                image, enhanced_prompt = generator.generate_image(beary_enhanced_prompt, False)
             
             # Store in session state
             SessionManager.set_generated_image(image)
@@ -140,7 +140,7 @@ def _generate_polly_image(api_key: str, prompt: str):
             st.session_state["generation_timestamp"] = time.time()
             
             # Navigate to result page
-            SessionManager.navigate_to_polly_result()
+            SessionManager.navigate_to_beary_result()
             st.rerun()
             
     except ImageGenerationError as e:
@@ -149,20 +149,22 @@ def _generate_polly_image(api_key: str, prompt: str):
         error_msg = format_error_message(e)
         st.error(error_msg)
 
-def _enhance_polly_prompt(user_prompt: str) -> str:
+def _enhance_beary_prompt(user_prompt: str) -> str:
     """
-    Enhance user prompt with Polly-specific styling and context
+    Enhance user prompt with Beary-specific styling and context
     
     Args:
         user_prompt (str): User's original prompt
         
     Returns:
-        str: Enhanced prompt with Polly styling
+        str: Enhanced prompt with Beary styling
     """
     
-    polly_context = (
-    "Polly is a cheerful pink penguin with a friendly expression, cute round features, and a distinct pink body. "
-    "She is as seen in her reference image. "
+    beary_context = (
+    "Beary is a cartoon brown bear with a rounded body, rich brown fur, and a dark brown snout. "
+    "He has large, expressive eyes, a stoic expression, and clenched fists that give him a serious yet comical appearance. "
+    "Beary is known for his deadpan humor and silent prankster persona—always calm, always plotting something funny. "
+    "His appearance should exactly match the reference image provided, including his posture and facial features. "
     )
 
     alf_context = (
@@ -171,19 +173,19 @@ def _enhance_polly_prompt(user_prompt: str) -> str:
     )
 
     combined_reference_instruction = (
-    "Use both Polly and ALF’s reference images to accurately represent their appearance. "
-    "Ensure Polly and ALF appear together in the scene described below, interacting naturally. "
+    "Use both Beary and ALF's reference images to accurately represent their appearance. "
+    "Ensure Beary and ALF appear together in the scene described below, with Beary showing his prankster nature. "
     )
 
-    user_scene = user_prompt  # Example: "exploring a glowing jungle with magical plants"
+    user_scene = user_prompt  # Example: "setting up elaborate pranks in colorful comedy dimensions"
 
     enhanced_prompt = (
-    f"{polly_context}{alf_context}{combined_reference_instruction} "
-    f"The scene shows Polly and ALF {user_scene}. "
-    "Both characters have whimsical, cartoon-style proportions and friendly expressions. "
-    "High-quality digital illustration with soft shading and warm lighting. "
-    "Colorful, magical atmosphere that emphasizes their friendship and shared adventure. "
-    "Render them side by side, clearly visible, and actively engaged in the scene."
+    f"{beary_context}{alf_context}{combined_reference_instruction} "
+    f"The scene shows Beary and ALF {user_scene}. "
+    "Beary retains his stoic, serious cartoon style while engaging in pranks, and ALF maintains his tech-themed, fun-loving appearance. "
+    "High-quality digital illustration with soft shading and playful, vibrant lighting. "
+    "Humorous, lighthearted atmosphere that emphasizes their comedic partnership and Beary’s subtle mischief. "
+    "Render both characters clearly visible, side by side or in action, fully engaged in the described comedic scene."
     )
     
     return enhanced_prompt

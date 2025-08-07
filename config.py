@@ -105,7 +105,13 @@ PAGES = {
     "GOONER_RESULT": "gooner_result",
     "RETSBA_PROMPT": "retsba_prompt",
     "RETSBA_GENERATING": "retsba_generating",
-    "RETSBA_RESULT": "retsba_result"
+    "RETSBA_RESULT": "retsba_result",
+    "BEARY_PROMPT": "beary_prompt",
+    "BEARY_GENERATING": "beary_generating",
+    "BEARY_RESULT": "beary_result",
+    "GOD_PROMPT": "god_prompt",
+    "GOD_GENERATING": "god_generating",
+    "GOD_RESULT": "god_result"
 }
 
 # Session State Keys
@@ -119,7 +125,9 @@ SESSION_KEYS = {
     "POLLY_REFERENCE_IMAGES": "polly_reference_images",
     "ABSTER_REFERENCE_IMAGES": "abster_reference_images",
     "GOONER_REFERENCE_IMAGES": "gooner_reference_images",
-    "RETSBA_REFERENCE_IMAGES": "retsba_reference_images"
+    "RETSBA_REFERENCE_IMAGES": "retsba_reference_images",
+    "BEARY_REFERENCE_IMAGES": "beary_reference_images",
+    "GOD_REFERENCE_IMAGES": "god_reference_images"
 }
 
 # UI Text Constants
@@ -174,6 +182,24 @@ UI_TEXT = {
         "back_button": "🔙 Back to Friends",
         "random_button": "🎲 Random Villainous Adventure",
         "mix_button": "🌀 Mix Villainous Adventure"
+    },
+    "BEARY": {
+        "title": "🐊🐻 ALF & Beary Prankster Adventures",
+        "subtitle": "Create comedy adventures with ALF and Beary the number 1 prankster in abstract chain",
+        "description": "Describe the prankster adventure ALF and Beary will create...",
+        "generate_button": "🌟 Generate ALF & Beary Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Comedy Adventure",
+        "mix_button": "🌀 Mix Comedy Adventure"
+    },
+    "GOD": {
+        "title": "🐊🐕 ALF & GOD Dyslexic Adventures",
+        "subtitle": "Create golden adventures with ALF and GOD the Dyslexic Dog in Abstract",
+        "description": "Describe the dyslexic adventure ALF and GOD will experience...",
+        "generate_button": "🌟 Generate ALF & GOD Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Dyslexic Adventure",
+        "mix_button": "🌀 Mix Dyslexic Adventure"
     },
     "PROMPT": {
         "title": "🧿 What Will ALF Become?",

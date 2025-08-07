@@ -50,6 +50,14 @@ class SessionManager:
         # Reference images for Retsba
         if SESSION_KEYS["RETSBA_REFERENCE_IMAGES"] not in st.session_state:
             st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Beary
+        if SESSION_KEYS["BEARY_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["BEARY_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for GOD
+        if SESSION_KEYS["GOD_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["GOD_REFERENCE_IMAGES"]] = []
     
     @staticmethod
     def get_current_page() -> str:
@@ -255,6 +263,36 @@ class SessionManager:
     def navigate_to_retsba_result():
         """Navigate to Retsba result page"""
         SessionManager.set_page(PAGES["RETSBA_RESULT"])
+    
+    @staticmethod
+    def navigate_to_beary_prompt():
+        """Navigate to Beary prompt page"""
+        SessionManager.set_page(PAGES["BEARY_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_beary_generating():
+        """Navigate to Beary generating page"""
+        SessionManager.set_page(PAGES["BEARY_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_beary_result():
+        """Navigate to Beary result page"""
+        SessionManager.set_page(PAGES["BEARY_RESULT"])
+    
+    @staticmethod
+    def navigate_to_god_prompt():
+        """Navigate to GOD prompt page"""
+        SessionManager.set_page(PAGES["GOD_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_god_generating():
+        """Navigate to GOD generating page"""
+        SessionManager.set_page(PAGES["GOD_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_god_result():
+        """Navigate to GOD result page"""
+        SessionManager.set_page(PAGES["GOD_RESULT"])
     
     @staticmethod
     def has_generated_image() -> bool:
@@ -630,3 +668,141 @@ class SessionManager:
         """
         from utils.reference_loader import ReferenceImageLoader
         return ReferenceImageLoader.get_retsba_reference_images_info()
+    
+    @staticmethod
+    def get_beary_reference_images() -> list:
+        """
+        Get the Beary reference images from session state
+        
+        Returns:
+            list: List of Beary reference images
+        """
+        return st.session_state.get(SESSION_KEYS["BEARY_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_beary_reference_image(image: Image.Image):
+        """
+        Add a Beary reference image to the session
+        
+        Args:
+            image (Image.Image): Beary reference image to add
+        """
+        ref_images = SessionManager.get_beary_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["BEARY_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_beary_reference_images():
+        """Clear all Beary reference images from session"""
+        st.session_state[SESSION_KEYS["BEARY_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_beary_reference_images() -> bool:
+        """
+        Check if there are Beary reference images in session
+        
+        Returns:
+            bool: True if there are Beary reference images
+        """
+        return len(SessionManager.get_beary_reference_images()) > 0
+    
+    @staticmethod
+    def load_beary_reference_images_from_folder():
+        """Load Beary reference images from the references/beary folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the beary references folder
+        loaded_images = ReferenceImageLoader.load_beary_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["BEARY_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_beary_reference_images_info() -> dict:
+        """
+        Get information about Beary reference images
+        
+        Returns:
+            dict: Information about loaded Beary reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_beary_reference_images_info()
+    
+    @staticmethod
+    def get_god_reference_images() -> list:
+        """
+        Get the GOD reference images from session state
+        
+        Returns:
+            list: List of GOD reference images
+        """
+        return st.session_state.get(SESSION_KEYS["GOD_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_god_reference_image(image: Image.Image):
+        """
+        Add a GOD reference image to the session
+        
+        Args:
+            image (Image.Image): GOD reference image to add
+        """
+        ref_images = SessionManager.get_god_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["GOD_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_god_reference_images():
+        """Clear all GOD reference images from session"""
+        st.session_state[SESSION_KEYS["GOD_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_god_reference_images() -> bool:
+        """
+        Check if there are GOD reference images in session
+        
+        Returns:
+            bool: True if there are GOD reference images
+        """
+        return len(SessionManager.get_god_reference_images()) > 0
+    
+    @staticmethod
+    def load_god_reference_images_from_folder():
+        """Load GOD reference images from the references/god folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the god references folder
+        loaded_images = ReferenceImageLoader.load_god_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["GOD_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_god_reference_images_info() -> dict:
+        """
+        Get information about GOD reference images
+        
+        Returns:
+            dict: Information about loaded GOD reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_god_reference_images_info()

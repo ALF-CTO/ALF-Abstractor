@@ -74,6 +74,30 @@ class ReferenceImageLoader:
         return os.path.join(current_dir, 'references', 'retsba')
     
     @staticmethod
+    def get_beary_references_folder_path() -> str:
+        """
+        Get the path to the Beary references folder
+        
+        Returns:
+            str: Path to the Beary references folder
+        """
+        # Get the directory where the current script is located
+        current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        return os.path.join(current_dir, 'references', 'beary')
+    
+    @staticmethod
+    def get_god_references_folder_path() -> str:
+        """
+        Get the path to the GOD references folder
+        
+        Returns:
+            str: Path to the GOD references folder
+        """
+        # Get the directory where the current script is located
+        current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        return os.path.join(current_dir, 'references', 'god')
+    
+    @staticmethod
     def load_reference_images() -> List[Tuple[Image.Image, str]]:
         """
         Load all reference images from the references folder
@@ -314,6 +338,102 @@ class ReferenceImageLoader:
         return loaded_images
     
     @staticmethod
+    def load_beary_reference_images() -> List[Tuple[Image.Image, str]]:
+        """
+        Load all Beary reference images from the references/beary folder
+        
+        Returns:
+            List[Tuple[Image.Image, str]]: List of (image, filename) tuples
+        """
+        beary_references_path = ReferenceImageLoader.get_beary_references_folder_path()
+        loaded_images = []
+        
+        if not os.path.exists(beary_references_path):
+            st.info(f"Beary references folder not found at: {beary_references_path}")
+            return loaded_images
+        
+        try:
+            # Get all files in the beary references folder
+            files = os.listdir(beary_references_path)
+            image_files = [
+                f for f in files 
+                if os.path.splitext(f.lower())[1] in ReferenceImageLoader.SUPPORTED_EXTENSIONS
+            ]
+            
+            for filename in image_files:
+                try:
+                    file_path = os.path.join(beary_references_path, filename)
+                    image = Image.open(file_path)
+                    
+                    # Convert to RGB if necessary
+                    if image.mode != 'RGB':
+                        image = image.convert('RGB')
+                    
+                    loaded_images.append((image, filename))
+                    
+                except Exception as e:
+                    st.warning(f"Could not load Beary reference image {filename}: {str(e)}")
+                    continue
+            
+            if loaded_images:
+                st.success(f"✅ Loaded {len(loaded_images)} Beary reference images")
+            else:
+                st.info("ℹ️ No Beary reference images found. Add Beary images to the 'references/beary' folder to use them for generation.")
+                
+        except Exception as e:
+            st.error(f"Error accessing Beary references folder: {str(e)}")
+        
+        return loaded_images
+    
+    @staticmethod
+    def load_god_reference_images() -> List[Tuple[Image.Image, str]]:
+        """
+        Load all GOD reference images from the references/god folder
+        
+        Returns:
+            List[Tuple[Image.Image, str]]: List of (image, filename) tuples
+        """
+        god_references_path = ReferenceImageLoader.get_god_references_folder_path()
+        loaded_images = []
+        
+        if not os.path.exists(god_references_path):
+            st.info(f"GOD references folder not found at: {god_references_path}")
+            return loaded_images
+        
+        try:
+            # Get all files in the god references folder
+            files = os.listdir(god_references_path)
+            image_files = [
+                f for f in files 
+                if os.path.splitext(f.lower())[1] in ReferenceImageLoader.SUPPORTED_EXTENSIONS
+            ]
+            
+            for filename in image_files:
+                try:
+                    file_path = os.path.join(god_references_path, filename)
+                    image = Image.open(file_path)
+                    
+                    # Convert to RGB if necessary
+                    if image.mode != 'RGB':
+                        image = image.convert('RGB')
+                    
+                    loaded_images.append((image, filename))
+                    
+                except Exception as e:
+                    st.warning(f"Could not load GOD reference image {filename}: {str(e)}")
+                    continue
+            
+            if loaded_images:
+                st.success(f"✅ Loaded {len(loaded_images)} GOD reference images")
+            else:
+                st.info("ℹ️ No GOD reference images found. Add GOD images to the 'references/god' folder to use them for generation.")
+                
+        except Exception as e:
+            st.error(f"Error accessing GOD references folder: {str(e)}")
+        
+        return loaded_images
+    
+    @staticmethod
     def get_reference_images_info() -> dict:
         """
         Get information about available reference images
@@ -513,6 +633,88 @@ class ReferenceImageLoader:
             return {
                 "folder_exists": True,
                 "folder_path": retsba_references_path,
+                "image_count": 0,
+                "image_files": [],
+                "error": str(e)
+            }
+    
+    @staticmethod
+    def get_beary_reference_images_info() -> dict:
+        """
+        Get information about available Beary reference images
+        
+        Returns:
+            dict: Information about Beary reference images
+        """
+        beary_references_path = ReferenceImageLoader.get_beary_references_folder_path()
+        
+        if not os.path.exists(beary_references_path):
+            return {
+                "folder_exists": False,
+                "folder_path": beary_references_path,
+                "image_count": 0,
+                "image_files": []
+            }
+        
+        try:
+            files = os.listdir(beary_references_path)
+            image_files = [
+                f for f in files 
+                if os.path.splitext(f.lower())[1] in ReferenceImageLoader.SUPPORTED_EXTENSIONS
+            ]
+            
+            return {
+                "folder_exists": True,
+                "folder_path": beary_references_path,
+                "image_count": len(image_files),
+                "image_files": image_files
+            }
+            
+        except Exception as e:
+            return {
+                "folder_exists": True,
+                "folder_path": beary_references_path,
+                "image_count": 0,
+                "image_files": [],
+                "error": str(e)
+            }
+    
+    @staticmethod
+    def get_god_reference_images_info() -> dict:
+        """
+        Get information about available GOD reference images
+        
+        Returns:
+            dict: Information about GOD reference images
+        """
+        god_references_path = ReferenceImageLoader.get_god_references_folder_path()
+        
+        if not os.path.exists(god_references_path):
+            return {
+                "folder_exists": False,
+                "folder_path": god_references_path,
+                "image_count": 0,
+                "image_files": []
+            }
+        
+        try:
+            files = os.listdir(god_references_path)
+            image_files = [
+                f for f in files 
+                if os.path.splitext(f.lower())[1] in ReferenceImageLoader.SUPPORTED_EXTENSIONS
+            ]
+            
+            return {
+                "folder_exists": True,
+                "folder_path": god_references_path,
+                "image_count": len(image_files),
+                "image_files": image_files
+            }
+            
+        except Exception as e:
+            return {
+                "folder_exists": True,
+                "folder_path": god_references_path,
                 "image_count": 0,
                 "image_files": [],
                 "error": str(e)
