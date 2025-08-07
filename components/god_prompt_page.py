@@ -1,47 +1,32 @@
 """
 GOD Prompt Page Component for ALF Abstractor
-Where users create magical adventure prompts for ALF and GOD the Golden Dog
+Where users craft prompts for ALF and GOD the Golden Dog dyslexic adventures
 """
 
 import streamlit as st
-import random
-from components.styles import load_alf_css, create_title, create_subtitle, create_mystical_text
+from components.styles import load_alf_css, create_title, create_mystical_text
+from utils.helpers import validate_prompt_length
 from utils.session_manager import SessionManager
 from config import UI_TEXT
 
-# GOD-specific prompt objects (dyslexic/golden themes)
+# GOD-specific prompt components (dyslexic/golden themes)
 GOD_PROMPT_OBJECTS = [
-    "playing with backwards letters in a golden field",
-    "spelling words in mixed-up but beautiful ways",
-    "chasing dyslexic butterflies through golden gardens",
-    "creating art with scrambled letter blocks",
-    "reading upside-down books in a golden library",
-    "writing poetry with letters floating in reverse",
-    "solving word puzzles in golden dimensions",
-    "teaching ALF about beautiful spelling mistakes",
-    "dancing with backwards alphabet letters",
-    "painting with golden, mixed-up words",
-    "exploring a world where letters float freely",
-    "creating dyslexic masterpieces together"
+    "ALF and GOD playing with backwards letters together",
+    "ALF and GOD spelling words in mixed-up but beautiful ways",
+    "ALF and GOD chasing dyslexic butterflies through golden gardens",
+    "ALF and GOD creating art with scrambled letter blocks",
+    "ALF and GOD reading upside-down books in a golden library",
+    "ALF and GOD writing poetry with letters floating in reverse",
+    "ALF and GOD solving word puzzles in golden dimensions",
+    "ALF and GOD teaching each other about beautiful spelling mistakes",
+    "ALF and GOD dancing with backwards alphabet letters",
+    "ALF and GOD painting with golden, mixed-up words",
+    "ALF and GOD exploring a world where letters float freely",
+    "ALF and GOD creating dyslexic masterpieces together",
+    "ALF and GOD organizing golden letter storms",
+    "ALF and GOD building words that spell backwards magic"
 ]
 
-# GOD-specific emotions (dyslexic/confused but happy themes)
-GOD_PROMPT_EMOTIONS = [
-    "happily confused but determined",
-    "joyfully mixing up words",
-    "golden and slightly puzzled",
-    "cheerfully dyslexic and proud",
-    "warmly confused but loving",
-    "playfully scrambling letters",
-    "golden-hearted and mixed-up",
-    "beautifully backwards thinking",
-    "lovingly linguistic chaos",
-    "bright and dyslexically creative",
-    "golden and word-swirling",
-    "charmingly letter-confused"
-]
-
-# GOD-specific settings (dyslexic/golden environments)
 GOD_PROMPT_SETTINGS = [
     "in a golden library with backwards books",
     "among floating mixed-up letters",
@@ -57,136 +42,179 @@ GOD_PROMPT_SETTINGS = [
     "in a dyslexic paradise realm"
 ]
 
+GOD_PROMPT_EMOTIONS = [
+    "happily confused but determined",
+    "joyfully mixing up words",
+    "golden and slightly puzzled",
+    "cheerfully dyslexic and proud",
+    "warmly confused but loving",
+    "playfully scrambling letters",
+    "golden-hearted and mixed-up",
+    "beautifully backwards thinking",
+    "lovingly linguistic chaos",
+    "bright and dyslexically creative"
+]
+
+def generate_random_god_prompt():
+    """Generate a random prompt for ALF and GOD"""
+    import random
+    
+    obj = random.choice(GOD_PROMPT_OBJECTS)
+    setting = random.choice(GOD_PROMPT_SETTINGS)
+    emotion = random.choice(GOD_PROMPT_EMOTIONS)
+    
+    return f"{obj} {setting}, both characters are {emotion}"
+
+def mix_god_prompt_components():
+    """Mix different GOD prompt components"""
+    import random
+    
+    # Take random components
+    obj1 = random.choice(GOD_PROMPT_OBJECTS)
+    obj2 = random.choice(GOD_PROMPT_OBJECTS)
+    setting = random.choice(GOD_PROMPT_SETTINGS)
+    emotion = random.choice(GOD_PROMPT_EMOTIONS)
+    
+    # Create mixed prompt
+    base = obj1.split(" together")[0] if " together" in obj1 else obj1
+    return f"{base} and creating golden dyslexic magic {setting}, both {emotion}"
+
 def render_god_prompt_page():
-    """Render the prompt creation page for ALF and GOD adventures"""
+    """Render the GOD prompt input page"""
     load_alf_css()
     
-    # Page header
     st.markdown(
-        create_title(UI_TEXT["GOD"]["title"], "page-header"), 
+        create_title("🐊🐕 ALF & GOD Dyslexic Adventures", "page-header"), 
         unsafe_allow_html=True
     )
     
-    st.markdown(
-        create_subtitle(UI_TEXT["GOD"]["subtitle"]), 
-        unsafe_allow_html=True
-    )
-    
-    # Create main layout
     col1, col2, col3 = st.columns([1, 3, 1])
     
     with col2:
+        # Description text
         st.markdown(
-            create_mystical_text(UI_TEXT["GOD"]["description"]), 
+            create_mystical_text("Describe the dyslexic adventure ALF and GOD will experience..."), 
             unsafe_allow_html=True
         )
         
-        st.markdown("<br>", unsafe_allow_html=True)
+        # Show GOD info
+        st.success("🐕 **GOD** is the Dyslexic Dog in Abstract - a golden retriever who mixes up letters and words in charming, beautiful ways!")
         
-        # Prompt input area
-        st.markdown("### 🐕 Describe Your Dyslexic Adventure:")
-        
+        # Main prompt input
+        current_prompt = SessionManager.get_current_prompt()
         prompt = st.text_area(
-            "",
-            placeholder="e.g., ALF and GOD reading backwards books while golden letters float around them...",
-            height=120,
-            key="god_prompt_input"
+            "ALF & GOD Dyslexic Adventure Prompt",
+            value=current_prompt,
+            placeholder="e.g., ALF and GOD playing with backwards letters together in a golden library with backwards books, both happily confused but determined",
+            height=100,
+            key="god_prompt",
+            label_visibility="collapsed"
         )
         
-        st.markdown("<br>", unsafe_allow_html=True)
+        # Update session state with current prompt
+        if prompt != current_prompt:
+            SessionManager.set_current_prompt(prompt)
         
-        # Action buttons
+        # Button row for prompt generation
         col_a, col_b, col_c = st.columns(3)
         
         with col_a:
-            if st.button(UI_TEXT["GOD"]["random_button"], key="random_god_prompt"):
-                random_prompt = _generate_random_god_prompt()
-                st.session_state.god_prompt_input = random_prompt
+            if st.button("🎲 Random Dyslexic Adventure"):
+                random_prompt = generate_random_god_prompt()
+                SessionManager.set_current_prompt(random_prompt)
                 st.rerun()
         
         with col_b:
-            if st.button(UI_TEXT["GOD"]["mix_button"], key="mix_god_prompt"):
-                if prompt.strip():
-                    mixed_prompt = _mix_god_prompt(prompt)
-                    st.session_state.god_prompt_input = mixed_prompt
-                    st.rerun()
-                else:
-                    st.warning("Enter a prompt first to mix it!")
+            if st.button("🌀 Mix Dyslexic Adventure"):
+                mixed_prompt = mix_god_prompt_components()
+                SessionManager.set_current_prompt(mixed_prompt)
+                st.rerun()
         
         with col_c:
-            if st.button(UI_TEXT["GOD"]["generate_button"], key="generate_god_adventure", type="primary"):
-                if prompt.strip():
-                    # Store the prompt and navigate to generation
-                    SessionManager.set_current_prompt(prompt)
-                    SessionManager.navigate_to_god_generating()
-                    st.rerun()
-                else:
-                    st.warning("Please describe the dyslexic adventure first!")
-        
-        # Show some example prompts
-        st.markdown("<br>", unsafe_allow_html=True)
-        with st.expander("💡 Dyslexic Adventure Ideas"):
-            st.markdown("""
-            **Golden Letter Adventures:**
-            - ALF and GOD playing word games with floating golden letters
-            - Reading stories where all the words are beautifully mixed up
-            - Creating art by arranging dyslexic poetry in golden frames
-            
-            **Spelling Bee Adventures:**
-            - GOD teaching ALF that misspelled words can be beautiful
-            - Exploring a world where backwards writing is the norm
-            - Dancing with alphabet letters that float in golden spirals
-            
-            **Dyslexic Paradise:**
-            - GOD showing ALF how mixed-up letters create magic
-            - Playing in a golden field where words grow like flowers
-            - Building castles out of scrambled letter blocks
-            """)
-        
-        # Reference images info  
-        _show_god_reference_info()
-        
-        # Navigation buttons
-        st.markdown("<hr><br>", unsafe_allow_html=True)
-        
-        col_nav1, col_nav2 = st.columns(2)
-        
-        with col_nav1:
-            if st.button(UI_TEXT["GOD"]["back_button"], key="back_to_friends"):
+            if st.button("🔙 Back to Friends"):
                 SessionManager.navigate_to_friends()
                 st.rerun()
         
-        with col_nav2:
-            # Empty for spacing
-            pass
-
-def _generate_random_god_prompt() -> str:
-    """Generate a random GOD adventure prompt"""
-    obj = random.choice(GOD_PROMPT_OBJECTS)
-    emotion = random.choice(GOD_PROMPT_EMOTIONS) 
-    setting = random.choice(GOD_PROMPT_SETTINGS)
-    
-    return f"ALF and GOD {obj}, feeling {emotion}, {setting}"
-
-def _mix_god_prompt(original_prompt: str) -> str:
-    """Mix the user's prompt with GOD-specific elements"""
-    obj = random.choice(GOD_PROMPT_OBJECTS)
-    emotion = random.choice(GOD_PROMPT_EMOTIONS)
-    setting = random.choice(GOD_PROMPT_SETTINGS)
-    
-    # Mix original with new elements
-    mixed = f"{original_prompt}, while also {obj}, feeling {emotion}, {setting}"
-    
-    return mixed
-
-def _show_god_reference_info():
-    """Show information about GOD reference images"""
-    ref_info = SessionManager.get_god_reference_images_info()
-    
-    if ref_info.get("folder_exists"):
-        if ref_info["image_count"] > 0:
-            st.info(f"🐕 Using {ref_info['image_count']} GOD reference images for consistent character appearance")
-        else:
-            st.info("ℹ️ No GOD reference images found. Add images to 'references/god' folder for consistent character appearance.")
-    else:
-        st.info("ℹ️ GOD reference folder not found. The app will use default character descriptions.")
+        # Show validation feedback
+        if prompt:
+            is_valid, error_msg = validate_prompt_length(prompt)
+            if not is_valid:
+                st.warning(error_msg)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Reference images section - show both ALF and GOD references
+        col_ref1, col_ref2 = st.columns(2)
+        
+        with col_ref1:
+            st.markdown("### 🐊 ALF Reference Images")
+            
+            ref_info = SessionManager.get_reference_images_info()
+            ref_images = SessionManager.get_reference_images()
+            
+            if ref_info["image_count"] > 0:
+                st.markdown(f"📁 **{ref_info['image_count']} ALF images loaded**")
+                
+                # Display ALF reference images
+                if ref_images:
+                    for i, img in enumerate(ref_images[:2]):  # Show first 2 ALF images
+                        st.image(img, caption=f"ALF Ref {i+1}", use_column_width=True)
+                    
+                    if len(ref_images) > 2:
+                        st.caption(f"+ {len(ref_images) - 2} more ALF images")
+                
+                # Reload ALF button
+                if st.button("🔄 Reload ALF References", key="reload_alf"):
+                    SessionManager.load_reference_images_from_folder()
+                    st.rerun()
+            else:
+                st.info("📂 No ALF reference images found.")
+                st.caption(f"Add ALF images to: `{ref_info['folder_path']}`")
+                
+                if st.button("🔄 Check for ALF Images", key="check_alf"):
+                    SessionManager.load_reference_images_from_folder()
+                    st.rerun()
+        
+        with col_ref2:
+            st.markdown("### 🐕 GOD Reference Images")
+            
+            god_ref_info = SessionManager.get_god_reference_images_info()
+            god_ref_images = SessionManager.get_god_reference_images()
+            
+            if god_ref_info["image_count"] > 0:
+                st.markdown(f"📁 **{god_ref_info['image_count']} GOD images loaded**")
+                
+                # Display GOD reference images
+                if god_ref_images:
+                    for i, img in enumerate(god_ref_images[:2]):  # Show first 2 GOD images
+                        st.image(img, caption=f"GOD Ref {i+1}", use_column_width=True)
+                    
+                    if len(god_ref_images) > 2:
+                        st.caption(f"+ {len(god_ref_images) - 2} more GOD images")
+                
+                # Reload GOD button
+                if st.button("🔄 Reload GOD References", key="reload_god"):
+                    SessionManager.load_god_reference_images_from_folder()
+                    st.rerun()
+            else:
+                st.info("📂 No GOD reference images found.")
+                st.caption(f"Add GOD images to: `{god_ref_info['folder_path']}`")
+                
+                if st.button("🔄 Check for GOD Images", key="check_god"):
+                    SessionManager.load_god_reference_images_from_folder()
+                    st.rerun()
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Generate button
+        if st.button("🌟 Generate ALF & GOD Adventure", key="generate_god_btn"):
+            current_prompt = SessionManager.get_current_prompt()
+            if current_prompt.strip():
+                is_valid, error_msg = validate_prompt_length(current_prompt)
+                if is_valid:
+                    SessionManager.navigate_to_god_generating()
+                    st.rerun()
+                else:
+                    st.error(error_msg)
+            else:
+                st.warning("You must describe the dyslexic adventure to summon ALF and GOD...")

@@ -1,200 +1,193 @@
 """
 GOD Generation Page Component for ALF Abstractor
-The mystical generation interface for ALF and GOD the Golden Dog dyslexic adventures
+Where the mystical ALF and GOD the Golden Dog dyslexic image generation happens
 """
 
 import streamlit as st
 import time
-import random
-from openai import OpenAI
-from components.styles import load_alf_css, create_title, create_quote, create_mystical_text
-from services.image_generator import ALFImageGenerator
+from components.styles import load_alf_css, create_title
+from services.image_generator import ALFImageGenerator, ImageGenerationError
+from utils.helpers import get_random_loading_message, format_error_message
 from utils.session_manager import SessionManager
-from config import OPENAI_CONFIG
-
-# GOD-specific loading messages (dyslexic/golden themes)
-GOD_LOADING_MESSAGES = [
-    "Mixing up letters in golden dimensions...",
-    "Creating the most brilliant dyslexic art...", 
-    "Scrambling words into golden poetry...",
-    "Building mixed-up magical realms...",
-    "Dyslexically organizing digital adventures...",
-    "Golden paws typing backwards messages...",
-    "Creating beautifully confused golden scenes...",
-    "Mixing letters with golden sparkles..."
-]
+from config import UI_TEXT
 
 def render_god_generation_page():
-    """Render the generation page for ALF and GOD adventures"""
+    """Render the ALF and GOD image generation page"""
     load_alf_css()
     
     st.markdown(
-        create_title("🌀 ALF & GOD Are Manifesting...", "page-header"), 
+        create_title("🌀 ALF & GOD are Dyslexically Creating...", "page-header"), 
         unsafe_allow_html=True
     )
     
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        # Get the current prompt
-        prompt = SessionManager.get_current_prompt()
+        # API key input - using widget key to manage state directly
+        api_key = st.text_input(
+            "Enter your OpenAI API Key:", 
+            type="password", 
+            key="api_key"
+        )
         
-        if not prompt:
-            st.error("No adventure prompt found!")
-            if st.button("🔙 Back to GOD Prompt"):
+        current_prompt = SessionManager.get_current_prompt()
+        
+        # Show current prompt
+        if current_prompt:
+            st.info(f"**Dyslexic adventure prompt:** {current_prompt}")
+        
+        # Show reference images if available
+        alf_ref_images = SessionManager.get_reference_images()
+        god_ref_images = SessionManager.get_god_reference_images()
+        
+        if alf_ref_images or god_ref_images:
+            st.markdown("**🖼️ Using Reference Images:**")
+            
+            col_gen_ref1, col_gen_ref2 = st.columns(2)
+            
+            with col_gen_ref1:
+                if alf_ref_images:
+                    st.markdown("**🐊 ALF References:**")
+                    for i, img in enumerate(alf_ref_images[-2:]):  # Show last 2 ALF
+                        st.image(img, caption=f"ALF Ref {i+1}", use_column_width=True)
+            
+            with col_gen_ref2:
+                if god_ref_images:
+                    st.markdown("**🐕 GOD References:**")
+                    for i, img in enumerate(god_ref_images[-2:]):  # Show last 2 GOD
+                        st.image(img, caption=f"GOD Ref {i+1}", use_column_width=True)
+        
+        # Generation button
+        if api_key and current_prompt:
+            if st.button("Generate ALF & GOD Adventure"):
+                _generate_god_image(api_key, current_prompt)
+        
+        # Navigation buttons
+        col_nav1, col_nav2 = st.columns(2)
+        
+        with col_nav1:
+            if st.button("🔙 Back to Prompt"):
                 SessionManager.navigate_to_god_prompt()
                 st.rerun()
-            return
         
-        # Show the prompt being used
-        st.markdown(
-            create_mystical_text(f"Golden adventure brewing: {prompt}"), 
-            unsafe_allow_html=True
-        )
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # API Key input
-        api_key = st.text_input(
-            "🔑 Enter your OpenAI API Key:",
-            type="password",
-            placeholder="sk-...",
-            key="god_api_key"
-        )
-        
-        # Generate button
-        if st.button("🌟 Generate ALF & GOD Adventure", key="generate_god", type="primary"):
-            if not api_key.strip():
-                st.error("Please enter your OpenAI API key to generate the adventure.")
-                return
-                
-            _generate_god_adventure(api_key, prompt)
-        
-        # Back button
-        st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("🔙 Back to GOD Prompt"):
-            SessionManager.navigate_to_god_prompt()
-            st.rerun()
+        with col_nav2:
+            # Show result button if image exists
+            if SessionManager.has_generated_image():
+                if st.button("🎭 View Adventure"):
+                    SessionManager.navigate_to_god_result()
+                    st.rerun()
 
-def _generate_god_adventure(api_key: str, prompt: str):
+def _generate_god_image(api_key: str, prompt: str):
     """
-    Generate ALF and GOD adventure using OpenAI API
+    Generate ALF and GOD image using the provided API key and prompt
     
     Args:
         api_key (str): OpenAI API key
-        prompt (str): User's adventure prompt
+        prompt (str): User prompt for generation
     """
     try:
-        # Create the enhanced prompt for ALF and GOD
-        enhanced_prompt = _create_god_prompt(prompt)
+        # Validate API key format
+        if not ALFImageGenerator.validate_api_key(api_key):
+            st.error("Invalid API key format. Please check your OpenAI API key.")
+            return
         
-        # Show progress with GOD-specific loading messages
-        progress_bar = st.progress(0)
-        status_text = st.empty()
+        # Initialize the image generator
+        generator = ALFImageGenerator(api_key)
         
-        loading_message = random.choice(GOD_LOADING_MESSAGES)
-        status_text.text(loading_message)
+        # Show mystical loading message
+        loading_messages = [
+            "🐊🐕 ALF and GOD are mixing up letters in golden dimensions...",
+            "✨ Creating the most brilliant dyslexic art...", 
+            "🌟 Painting golden retriever fur with floating letters...",
+            "📝 Building beautifully confused golden realms...",
+            "🎨 Weaving dyslexic magic...",
+            "💫 Mixing crocodile green with golden dog wisdom..."
+        ]
         
-        # Initialize progress
-        for i in range(30):
-            progress_bar.progress(i + 1)
-            time.sleep(0.1)
+        import random
+        loading_message = random.choice(loading_messages)
         
-        # Initialize OpenAI client
-        client = OpenAI(api_key=api_key)
-        
-        status_text.text("🐕 GOD is dyslexically arranging the scene...")
-        
-        # Get reference images for context
-        reference_images = SessionManager.get_reference_images()
-        god_reference_images = SessionManager.get_god_reference_images()
-        
-        # Update progress
-        for i in range(30, 60):
-            progress_bar.progress(i + 1)
-            time.sleep(0.05)
-        
-        status_text.text("✨ Golden letters swirling into beautiful chaos...")
-        
-        # Generate the image
-        response = client.images.generate(
-            model=OPENAI_CONFIG["model"],
-            prompt=enhanced_prompt,
-            size=OPENAI_CONFIG["size"],
-            quality=OPENAI_CONFIG["quality"],
-            n=OPENAI_CONFIG["n"]
-        )
-        
-        # Complete progress
-        for i in range(60, 100):
-            progress_bar.progress(i + 1)
-            time.sleep(0.02)
-        
-        progress_bar.progress(100)
-        status_text.text("🎭 Golden adventure complete!")
-        
-        # Process the generated image
-        image_url = response.data[0].url
-        image = ALFImageGenerator.download_image(image_url)
-        
-        if image:
-            # Store the image and prompt in session
-            SessionManager.set_generated_image(image)
-            SessionManager.set_current_prompt(prompt)
+        with st.spinner(loading_message):
+            # Add some mystical delay for effect
+            time.sleep(1)
             
-            # Add to history
+            # Enhance prompt specifically for ALF and GOD
+            god_enhanced_prompt = _enhance_god_prompt(prompt)
+            
+            # Get both ALF and GOD reference images
+            alf_reference_images = SessionManager.get_reference_images()
+            god_reference_images = SessionManager.get_god_reference_images()
+            
+            # Combine both reference sets for generation
+            all_reference_images = []
+            if alf_reference_images:
+                all_reference_images.extend(alf_reference_images)
+            if god_reference_images:
+                all_reference_images.extend(god_reference_images)
+            
+            if all_reference_images:
+                # Use the edit endpoint with combined reference images for better fidelity
+                image, enhanced_prompt = generator.generate_image_with_reference_files(god_enhanced_prompt, all_reference_images)
+            else:
+                # Use regular generation without references
+                image, enhanced_prompt = generator.generate_image(god_enhanced_prompt, False)
+            
+            # Store in session state
+            SessionManager.set_generated_image(image)
             SessionManager.add_to_history(prompt, image)
+            
+            # Store generation timestamp
+            st.session_state["generation_timestamp"] = time.time()
             
             # Navigate to result page
             SessionManager.navigate_to_god_result()
             st.rerun()
-        else:
-            st.error("Failed to process the generated adventure. Please try again.")
             
+    except ImageGenerationError as e:
+        st.error(str(e))
     except Exception as e:
-        st.error(f"Error creating ALF & GOD adventure: {str(e)}")
-        st.info("Please check your API key and try again.")
+        error_msg = format_error_message(e)
+        st.error(error_msg)
 
-def _create_god_prompt(user_prompt: str) -> str:
+def _enhance_god_prompt(user_prompt: str) -> str:
     """
-    Create an enhanced prompt for GOD (dyslexic dog) adventures
+    Enhance user prompt with GOD-specific styling and context
     
     Args:
-        user_prompt (str): Original user prompt
+        user_prompt (str): User's original prompt
         
     Returns:
-        str: Enhanced prompt for image generation
+        str: Enhanced prompt with GOD styling
     """
-    # GOD character context with dyslexic themes
+    
     god_context = (
-        "A friendly cartoon golden retriever character named GOD with bright golden fur, "
-        "playful expression, and slightly confused but happy demeanor. GOD is the dyslexic dog "
-        "who mixes up letters and words in charming ways. Whimsical, golden color palette, "
-        "same friendly facial features and golden coat as reference image."
+    "GOD is a small cartoon golden dog with an orange-yellow coat, large round eyes behind glasses, "
+    "and a slightly puzzled but innocent expression. He wears a green collar with a gold tag labeled 'G'. "
+    "GOD is gentle and curious. "
+    "He often appears to be lost in thought or trying to understand something important. "
+    "His appearance should exactly match the reference image provided, including his proportions, glasses, and collar. "
+    )
+
+    alf_context = (
+    "ALF is a friendly cartoon crocodile with green scales, white tech goggles, and a green digital vest. "
+    "He has a warm, adventurous expression and appears clever and fun-loving. "
+    )
+
+    combined_reference_instruction = (
+    "Use both GOD and ALF's reference images to accurately represent their appearance. "
+    "Ensure GOD and ALF appear together in the scene described below, with GOD showing his dyslexic golden magic. "
+    )
+
+    user_scene = user_prompt  # Example: "playing with backwards letters in a golden field"
+
+    enhanced_prompt = (
+    f"{god_context}{alf_context}{combined_reference_instruction} "
+    f"The scene shows GOD and ALF {user_scene}. "
+    "GOD retains his small, curious cartoon style and puzzled expression, "
+    "and ALF maintains his tech-savvy, cheerful appearance. "
+    "High-quality digital illustration with soft, warm lighting and glowing golden tones. "
+    "The setting should emphasize creativity, kindness, and the joy of imperfection. "
+    "Render both characters clearly visible, side by side or actively engaged, within the charming, golden scene."
     )
     
-    # Combine ALF's base prompt with GOD context
-    base_context = OPENAI_CONFIG["base_prompt_prefix"]
-    
-    enhanced_prompt = f"{base_context} Together with {god_context}, they are {user_prompt}. " \
-                     f"The scene shows both ALF and GOD in a golden, slightly mixed-up world where " \
-                     f"letters float around playfully and words get scrambled in beautiful ways. " \
-                     f"{OPENAI_CONFIG['base_prompt_suffix']} Include golden sparkles and floating letters."
-    
     return enhanced_prompt
-
-def _show_god_generation_status():
-    """Show generation status with GOD-specific theming"""
-    with st.spinner("🐕 GOD is dyslexically organizing the adventure..."):
-        time.sleep(1)
-    
-    # Show a GOD quote while generating
-    god_quotes = [
-        "Wodrs get mxied up, but herat stays true! - GOD",
-        "Soeitems the bset advnetures are misspelled! - GOD", 
-        "Gloden leters flaot in beutiful chaos! - GOD",
-        "I mgiht mix up leters, but I nver mix up frinedship! - GOD"
-    ]
-    
-    quote = random.choice(god_quotes)
-    st.markdown(create_quote(quote), unsafe_allow_html=True)

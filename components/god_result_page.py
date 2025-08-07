@@ -115,7 +115,7 @@ def _show_god_share_options(prompt: str):
     st.info("Copy this page URL to share your ALF & GOD golden adventure!")
     
     # Create shareable text for GOD adventures
-    share_text = f"🐊🐕 Just created a golden ALF & GOD dyslexic adventure!\\n\\nPrompt: {prompt}\\n\\n#ALFandGOD #DyslexicDog #AIArt #GoldenAdventures"
+    share_text = f"🐊🐕 Just created a golden ALF & GOD dyslexic adventure!\n\nPrompt: {prompt}\n\n#ALFandGOD #DyslexicDog #AIArt #GoldenAdventures"
     
     # Show the share text in an expandable section
     with st.expander("📋 Copy Share Text"):
