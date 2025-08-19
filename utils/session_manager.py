@@ -34,6 +34,46 @@ class SessionManager:
         # Reference images for ALF
         if SESSION_KEYS["REFERENCE_IMAGES"] not in st.session_state:
             st.session_state[SESSION_KEYS["REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Polly
+        if SESSION_KEYS["POLLY_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Abster
+        if SESSION_KEYS["ABSTER_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["ABSTER_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for GOONER
+        if SESSION_KEYS["GOONER_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["GOONER_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Retsba
+        if SESSION_KEYS["RETSBA_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Beary
+        if SESSION_KEYS["BEARY_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["BEARY_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for GOD
+        if SESSION_KEYS["GOD_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["GOD_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Pepe
+        if SESSION_KEYS["PEPE_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["PEPE_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Landwolf
+        if SESSION_KEYS["LANDWOLF_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["LANDWOLF_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Andy
+        if SESSION_KEYS["ANDY_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["ANDY_REFERENCE_IMAGES"]] = []
+        
+        # Reference images for Brett
+        if SESSION_KEYS["BRETT_REFERENCE_IMAGES"] not in st.session_state:
+            st.session_state[SESSION_KEYS["BRETT_REFERENCE_IMAGES"]] = []
     
     @staticmethod
     def get_current_page() -> str:
@@ -161,6 +201,11 @@ class SessionManager:
         SessionManager.set_page(PAGES["LANDING"])
     
     @staticmethod
+    def navigate_to_friends():
+        """Navigate to friends page"""
+        SessionManager.set_page(PAGES["FRIENDS"])
+    
+    @staticmethod
     def navigate_to_prompt():
         """Navigate to prompt page"""
         SessionManager.set_page(PAGES["PROMPT"])
@@ -174,6 +219,156 @@ class SessionManager:
     def navigate_to_result():
         """Navigate to result page"""
         SessionManager.set_page(PAGES["RESULT"])
+    
+    @staticmethod
+    def navigate_to_polly_prompt():
+        """Navigate to Polly prompt page"""
+        SessionManager.set_page(PAGES["POLLY_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_polly_generating():
+        """Navigate to Polly generating page"""
+        SessionManager.set_page(PAGES["POLLY_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_polly_result():
+        """Navigate to Polly result page"""
+        SessionManager.set_page(PAGES["POLLY_RESULT"])
+    
+    @staticmethod
+    def navigate_to_abster_prompt():
+        """Navigate to Abster prompt page"""
+        SessionManager.set_page(PAGES["ABSTER_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_abster_generating():
+        """Navigate to Abster generating page"""
+        SessionManager.set_page(PAGES["ABSTER_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_abster_result():
+        """Navigate to Abster result page"""
+        SessionManager.set_page(PAGES["ABSTER_RESULT"])
+    
+    @staticmethod
+    def navigate_to_gooner_prompt():
+        """Navigate to GOONER prompt page"""
+        SessionManager.set_page(PAGES["GOONER_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_gooner_generating():
+        """Navigate to GOONER generating page"""
+        SessionManager.set_page(PAGES["GOONER_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_gooner_result():
+        """Navigate to GOONER result page"""
+        SessionManager.set_page(PAGES["GOONER_RESULT"])
+    
+    @staticmethod
+    def navigate_to_retsba_prompt():
+        """Navigate to Retsba prompt page"""
+        SessionManager.set_page(PAGES["RETSBA_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_retsba_generating():
+        """Navigate to Retsba generating page"""
+        SessionManager.set_page(PAGES["RETSBA_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_retsba_result():
+        """Navigate to Retsba result page"""
+        SessionManager.set_page(PAGES["RETSBA_RESULT"])
+    
+    @staticmethod
+    def navigate_to_beary_prompt():
+        """Navigate to Beary prompt page"""
+        SessionManager.set_page(PAGES["BEARY_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_beary_generating():
+        """Navigate to Beary generating page"""
+        SessionManager.set_page(PAGES["BEARY_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_beary_result():
+        """Navigate to Beary result page"""
+        SessionManager.set_page(PAGES["BEARY_RESULT"])
+    
+    @staticmethod
+    def navigate_to_god_prompt():
+        """Navigate to GOD prompt page"""
+        SessionManager.set_page(PAGES["GOD_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_god_generating():
+        """Navigate to GOD generating page"""
+        SessionManager.set_page(PAGES["GOD_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_god_result():
+        """Navigate to GOD result page"""
+        SessionManager.set_page(PAGES["GOD_RESULT"])
+    
+    @staticmethod
+    def navigate_to_pepe_prompt():
+        """Navigate to Pepe prompt page"""
+        SessionManager.set_page(PAGES["PEPE_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_pepe_generating():
+        """Navigate to Pepe generating page"""
+        SessionManager.set_page(PAGES["PEPE_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_pepe_result():
+        """Navigate to Pepe result page"""
+        SessionManager.set_page(PAGES["PEPE_RESULT"])
+    
+    @staticmethod
+    def navigate_to_landwolf_prompt():
+        """Navigate to Landwolf prompt page"""
+        SessionManager.set_page(PAGES["LANDWOLF_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_landwolf_generating():
+        """Navigate to Landwolf generating page"""
+        SessionManager.set_page(PAGES["LANDWOLF_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_landwolf_result():
+        """Navigate to Landwolf result page"""
+        SessionManager.set_page(PAGES["LANDWOLF_RESULT"])
+    
+    @staticmethod
+    def navigate_to_andy_prompt():
+        """Navigate to Andy prompt page"""
+        SessionManager.set_page(PAGES["ANDY_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_andy_generating():
+        """Navigate to Andy generating page"""
+        SessionManager.set_page(PAGES["ANDY_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_andy_result():
+        """Navigate to Andy result page"""
+        SessionManager.set_page(PAGES["ANDY_RESULT"])
+    
+    @staticmethod
+    def navigate_to_brett_prompt():
+        """Navigate to Brett prompt page"""
+        SessionManager.set_page(PAGES["BRETT_PROMPT"])
+    
+    @staticmethod
+    def navigate_to_brett_generating():
+        """Navigate to Brett generating page"""
+        SessionManager.set_page(PAGES["BRETT_GENERATING"])
+    
+    @staticmethod
+    def navigate_to_brett_result():
+        """Navigate to Brett result page"""
+        SessionManager.set_page(PAGES["BRETT_RESULT"])
     
     @staticmethod
     def has_generated_image() -> bool:
@@ -273,3 +468,683 @@ class SessionManager:
         """
         from utils.reference_loader import ReferenceImageLoader
         return ReferenceImageLoader.get_reference_images_info()
+    
+    @staticmethod
+    def get_polly_reference_images() -> list:
+        """
+        Get the Polly reference images from session state
+        
+        Returns:
+            list: List of Polly reference images
+        """
+        return st.session_state.get(SESSION_KEYS["POLLY_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_polly_reference_image(image: Image.Image):
+        """
+        Add a Polly reference image to the session
+        
+        Args:
+            image (Image.Image): Polly reference image to add
+        """
+        ref_images = SessionManager.get_polly_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_polly_reference_images():
+        """Clear all Polly reference images from session"""
+        st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_polly_reference_images() -> bool:
+        """
+        Check if there are Polly reference images in session
+        
+        Returns:
+            bool: True if there are Polly reference images
+        """
+        return len(SessionManager.get_polly_reference_images()) > 0
+    
+    @staticmethod
+    def load_polly_reference_images_from_folder():
+        """Load Polly reference images from the references/polly folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the polly references folder
+        loaded_images = ReferenceImageLoader.load_polly_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["POLLY_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_polly_reference_images_info() -> dict:
+        """
+        Get information about Polly reference images
+        
+        Returns:
+            dict: Information about loaded Polly reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_polly_reference_images_info()
+    
+    @staticmethod
+    def get_abster_reference_images() -> list:
+        """
+        Get the Abster reference images from session state
+        
+        Returns:
+            list: List of Abster reference images
+        """
+        return st.session_state.get(SESSION_KEYS["ABSTER_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_abster_reference_image(image: Image.Image):
+        """
+        Add an Abster reference image to the session
+        
+        Args:
+            image (Image.Image): Abster reference image to add
+        """
+        ref_images = SessionManager.get_abster_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["ABSTER_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_abster_reference_images():
+        """Clear all Abster reference images from session"""
+        st.session_state[SESSION_KEYS["ABSTER_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_abster_reference_images() -> bool:
+        """
+        Check if there are Abster reference images in session
+        
+        Returns:
+            bool: True if there are Abster reference images
+        """
+        return len(SessionManager.get_abster_reference_images()) > 0
+    
+    @staticmethod
+    def load_abster_reference_images_from_folder():
+        """Load Abster reference images from the references/abster folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the abster references folder
+        loaded_images = ReferenceImageLoader.load_abster_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["ABSTER_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_abster_reference_images_info() -> dict:
+        """
+        Get information about Abster reference images
+        
+        Returns:
+            dict: Information about loaded Abster reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_abster_reference_images_info()
+    
+    @staticmethod
+    def get_gooner_reference_images() -> list:
+        """
+        Get the GOONER reference images from session state
+        
+        Returns:
+            list: List of GOONER reference images
+        """
+        return st.session_state.get(SESSION_KEYS["GOONER_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_gooner_reference_image(image: Image.Image):
+        """
+        Add a GOONER reference image to the session
+        
+        Args:
+            image (Image.Image): GOONER reference image to add
+        """
+        ref_images = SessionManager.get_gooner_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["GOONER_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_gooner_reference_images():
+        """Clear all GOONER reference images from session"""
+        st.session_state[SESSION_KEYS["GOONER_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_gooner_reference_images() -> bool:
+        """
+        Check if there are GOONER reference images in session
+        
+        Returns:
+            bool: True if there are GOONER reference images
+        """
+        return len(SessionManager.get_gooner_reference_images()) > 0
+    
+    @staticmethod
+    def load_gooner_reference_images_from_folder():
+        """Load GOONER reference images from the references/gooner folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the gooner references folder
+        loaded_images = ReferenceImageLoader.load_gooner_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["GOONER_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_gooner_reference_images_info() -> dict:
+        """
+        Get information about GOONER reference images
+        
+        Returns:
+            dict: Information about loaded GOONER reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_gooner_reference_images_info()
+    
+    @staticmethod
+    def get_retsba_reference_images() -> list:
+        """
+        Get the Retsba reference images from session state
+        
+        Returns:
+            list: List of Retsba reference images
+        """
+        return st.session_state.get(SESSION_KEYS["RETSBA_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_retsba_reference_image(image: Image.Image):
+        """
+        Add a Retsba reference image to the session
+        
+        Args:
+            image (Image.Image): Retsba reference image to add
+        """
+        ref_images = SessionManager.get_retsba_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_retsba_reference_images():
+        """Clear all Retsba reference images from session"""
+        st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_retsba_reference_images() -> bool:
+        """
+        Check if there are Retsba reference images in session
+        
+        Returns:
+            bool: True if there are Retsba reference images
+        """
+        return len(SessionManager.get_retsba_reference_images()) > 0
+    
+    @staticmethod
+    def load_retsba_reference_images_from_folder():
+        """Load Retsba reference images from the references/retsba folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the retsba references folder
+        loaded_images = ReferenceImageLoader.load_retsba_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["RETSBA_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_retsba_reference_images_info() -> dict:
+        """
+        Get information about Retsba reference images
+        
+        Returns:
+            dict: Information about loaded Retsba reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_retsba_reference_images_info()
+    
+    @staticmethod
+    def get_beary_reference_images() -> list:
+        """
+        Get the Beary reference images from session state
+        
+        Returns:
+            list: List of Beary reference images
+        """
+        return st.session_state.get(SESSION_KEYS["BEARY_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_beary_reference_image(image: Image.Image):
+        """
+        Add a Beary reference image to the session
+        
+        Args:
+            image (Image.Image): Beary reference image to add
+        """
+        ref_images = SessionManager.get_beary_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["BEARY_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_beary_reference_images():
+        """Clear all Beary reference images from session"""
+        st.session_state[SESSION_KEYS["BEARY_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_beary_reference_images() -> bool:
+        """
+        Check if there are Beary reference images in session
+        
+        Returns:
+            bool: True if there are Beary reference images
+        """
+        return len(SessionManager.get_beary_reference_images()) > 0
+    
+    @staticmethod
+    def load_beary_reference_images_from_folder():
+        """Load Beary reference images from the references/beary folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the beary references folder
+        loaded_images = ReferenceImageLoader.load_beary_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["BEARY_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_beary_reference_images_info() -> dict:
+        """
+        Get information about Beary reference images
+        
+        Returns:
+            dict: Information about loaded Beary reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_beary_reference_images_info()
+    
+    @staticmethod
+    def get_god_reference_images() -> list:
+        """
+        Get the GOD reference images from session state
+        
+        Returns:
+            list: List of GOD reference images
+        """
+        return st.session_state.get(SESSION_KEYS["GOD_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_god_reference_image(image: Image.Image):
+        """
+        Add a GOD reference image to the session
+        
+        Args:
+            image (Image.Image): GOD reference image to add
+        """
+        ref_images = SessionManager.get_god_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["GOD_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_god_reference_images():
+        """Clear all GOD reference images from session"""
+        st.session_state[SESSION_KEYS["GOD_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_god_reference_images() -> bool:
+        """
+        Check if there are GOD reference images in session
+        
+        Returns:
+            bool: True if there are GOD reference images
+        """
+        return len(SessionManager.get_god_reference_images()) > 0
+    
+    @staticmethod
+    def load_god_reference_images_from_folder():
+        """Load GOD reference images from the references/god folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the god references folder
+        loaded_images = ReferenceImageLoader.load_god_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["GOD_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_god_reference_images_info() -> dict:
+        """
+        Get information about GOD reference images
+        
+        Returns:
+            dict: Information about loaded GOD reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_god_reference_images_info()
+    
+    @staticmethod
+    def get_pepe_reference_images() -> list:
+        """
+        Get the Pepe reference images from session state
+        
+        Returns:
+            list: List of Pepe reference images
+        """
+        return st.session_state.get(SESSION_KEYS["PEPE_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_pepe_reference_image(image: Image.Image):
+        """
+        Add a Pepe reference image to the session
+        
+        Args:
+            image (Image.Image): Pepe reference image to add
+        """
+        ref_images = SessionManager.get_pepe_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["PEPE_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_pepe_reference_images():
+        """Clear all Pepe reference images from session"""
+        st.session_state[SESSION_KEYS["PEPE_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_pepe_reference_images() -> bool:
+        """
+        Check if there are Pepe reference images in session
+        
+        Returns:
+            bool: True if there are Pepe reference images
+        """
+        return len(SessionManager.get_pepe_reference_images()) > 0
+    
+    @staticmethod
+    def load_pepe_reference_images_from_folder():
+        """Load Pepe reference images from the references/pepe folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the pepe references folder
+        loaded_images = ReferenceImageLoader.load_pepe_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["PEPE_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_pepe_reference_images_info() -> dict:
+        """
+        Get information about Pepe reference images
+        
+        Returns:
+            dict: Information about loaded Pepe reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_pepe_reference_images_info()
+    
+    @staticmethod
+    def get_landwolf_reference_images() -> list:
+        """
+        Get the Landwolf reference images from session state
+        
+        Returns:
+            list: List of Landwolf reference images
+        """
+        return st.session_state.get(SESSION_KEYS["LANDWOLF_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_landwolf_reference_image(image: Image.Image):
+        """
+        Add a Landwolf reference image to the session
+        
+        Args:
+            image (Image.Image): Landwolf reference image to add
+        """
+        ref_images = SessionManager.get_landwolf_reference_images()
+        ref_images.append(image)
+        
+        # Keep only last 5 reference images to prevent memory issues
+        if len(ref_images) > 5:
+            ref_images = ref_images[-5:]
+            
+        st.session_state[SESSION_KEYS["LANDWOLF_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_landwolf_reference_images():
+        """Clear all Landwolf reference images from session"""
+        st.session_state[SESSION_KEYS["LANDWOLF_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_landwolf_reference_images() -> bool:
+        """
+        Check if there are Landwolf reference images in session
+        
+        Returns:
+            bool: True if there are Landwolf reference images
+        """
+        return len(SessionManager.get_landwolf_reference_images()) > 0
+    
+    @staticmethod
+    def load_landwolf_reference_images_from_folder():
+        """Load Landwolf reference images from the references/landwolf folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the landwolf references folder
+        loaded_images = ReferenceImageLoader.load_landwolf_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["LANDWOLF_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_landwolf_reference_images_info() -> dict:
+        """
+        Get information about Landwolf reference images
+        
+        Returns:
+            dict: Information about loaded Landwolf reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_landwolf_reference_images_info()
+    
+    @staticmethod
+    def get_andy_reference_images() -> list:
+        """
+        Get the Andy reference images from session state
+        
+        Returns:
+            list: List of Andy reference images
+        """
+        return st.session_state.get(SESSION_KEYS["ANDY_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_andy_reference_image(image: Image.Image):
+        """
+        Add an Andy reference image to the session
+        
+        Args:
+            image (Image.Image): Andy reference image to add
+        """
+        ref_images = SessionManager.get_andy_reference_images()
+        ref_images.append(image)
+        st.session_state[SESSION_KEYS["ANDY_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_andy_reference_images():
+        """Clear all Andy reference images from the session"""
+        st.session_state[SESSION_KEYS["ANDY_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_andy_reference_images() -> bool:
+        """
+        Check if Andy reference images are loaded
+        
+        Returns:
+            bool: True if Andy reference images are available
+        """
+        return len(SessionManager.get_andy_reference_images()) > 0
+    
+    @staticmethod
+    def load_andy_reference_images_from_folder():
+        """Load Andy reference images from the references/andy folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the andy references folder
+        loaded_images = ReferenceImageLoader.load_andy_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["ANDY_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_andy_reference_images_info() -> dict:
+        """
+        Get information about Andy reference images
+        
+        Returns:
+            dict: Information about loaded Andy reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_andy_reference_images_info()
+    
+    @staticmethod
+    def get_brett_reference_images() -> list:
+        """
+        Get the Brett reference images from session state
+        
+        Returns:
+            list: List of Brett reference images
+        """
+        return st.session_state.get(SESSION_KEYS["BRETT_REFERENCE_IMAGES"], [])
+    
+    @staticmethod
+    def add_brett_reference_image(image: Image.Image):
+        """
+        Add a Brett reference image to the session
+        
+        Args:
+            image (Image.Image): Brett reference image to add
+        """
+        ref_images = SessionManager.get_brett_reference_images()
+        ref_images.append(image)
+        st.session_state[SESSION_KEYS["BRETT_REFERENCE_IMAGES"]] = ref_images
+    
+    @staticmethod
+    def clear_brett_reference_images():
+        """Clear all Brett reference images from the session"""
+        st.session_state[SESSION_KEYS["BRETT_REFERENCE_IMAGES"]] = []
+    
+    @staticmethod
+    def has_brett_reference_images() -> bool:
+        """
+        Check if Brett reference images are loaded
+        
+        Returns:
+            bool: True if Brett reference images are available
+        """
+        return len(SessionManager.get_brett_reference_images()) > 0
+    
+    @staticmethod
+    def load_brett_reference_images_from_folder():
+        """Load Brett reference images from the references/brett folder into session state"""
+        from utils.reference_loader import ReferenceImageLoader
+        
+        # Load images from the brett references folder
+        loaded_images = ReferenceImageLoader.load_brett_reference_images()
+        
+        # Extract just the images (not the filenames) for session storage
+        images = [img for img, filename in loaded_images]
+        
+        # Store in session state
+        st.session_state[SESSION_KEYS["BRETT_REFERENCE_IMAGES"]] = images
+        
+        return len(images)
+    
+    @staticmethod
+    def get_brett_reference_images_info() -> dict:
+        """
+        Get information about Brett reference images
+        
+        Returns:
+            dict: Information about loaded Brett reference images
+        """
+        from utils.reference_loader import ReferenceImageLoader
+        return ReferenceImageLoader.get_brett_reference_images_info()

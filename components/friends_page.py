@@ -57,6 +57,38 @@ FRIENDS = {
         "species": "dog",
         "personality": "dyslexic and golden-hearted",
         "emoji": "🐕"
+    },
+    "pepe": {
+        "name": "Pepe",
+        "description": "One of the leading meme characters in Crypto",
+        "color": "green",
+        "species": "frog",
+        "personality": "legendary and memetic",
+        "emoji": "🐸"
+    },
+    "landwolf": {
+        "name": "Landwolf",
+        "description": "One of the leading meme characters in Crypto",
+        "color": "hairy",
+        "species": "wolf",
+        "personality": "fierce and pack-minded",
+        "emoji": "🐺"
+    },
+    "andy": {
+        "name": "Andy",
+        "description": "One of the leading meme characters in Crypto",
+        "color": "yellow",
+        "species": "guy",
+        "personality": "optimistic and radiant",
+        "emoji": "🟡"
+    },
+    "brett": {
+        "name": "Brett",
+        "description": "One of the leading meme characters in Crypto",
+        "color": "blue",
+        "species": "guy",
+        "personality": "strategic and confident",
+        "emoji": "🔵"
     }
 }
 
@@ -115,6 +147,18 @@ def render_friends_page():
                         st.rerun()
                     elif friend_key == "god":
                         SessionManager.navigate_to_god_prompt()
+                        st.rerun()
+                    elif friend_key == "pepe":
+                        SessionManager.navigate_to_pepe_prompt()
+                        st.rerun()
+                    elif friend_key == "landwolf":
+                        SessionManager.navigate_to_landwolf_prompt()
+                        st.rerun()
+                    elif friend_key == "andy":
+                        SessionManager.navigate_to_andy_prompt()
+                        st.rerun()
+                    elif friend_key == "brett":
+                        SessionManager.navigate_to_brett_prompt()
                         st.rerun()
         
         st.info("👆 Click on a friend above to start creating adventures together!")

@@ -90,9 +90,40 @@ OPENAI_CONFIG = {
 # Page Navigation States
 PAGES = {
     "LANDING": "landing",
+    "FRIENDS": "friends",
     "PROMPT": "prompt", 
     "GENERATING": "generating",
-    "RESULT": "result"
+    "RESULT": "result",
+    "POLLY_PROMPT": "polly_prompt",
+    "POLLY_GENERATING": "polly_generating", 
+    "POLLY_RESULT": "polly_result",
+    "ABSTER_PROMPT": "abster_prompt",
+    "ABSTER_GENERATING": "abster_generating",
+    "ABSTER_RESULT": "abster_result",
+    "GOONER_PROMPT": "gooner_prompt",
+    "GOONER_GENERATING": "gooner_generating",
+    "GOONER_RESULT": "gooner_result",
+    "RETSBA_PROMPT": "retsba_prompt",
+    "RETSBA_GENERATING": "retsba_generating",
+    "RETSBA_RESULT": "retsba_result",
+    "BEARY_PROMPT": "beary_prompt",
+    "BEARY_GENERATING": "beary_generating",
+    "BEARY_RESULT": "beary_result",
+    "GOD_PROMPT": "god_prompt",
+    "GOD_GENERATING": "god_generating",
+    "GOD_RESULT": "god_result",
+    "PEPE_PROMPT": "pepe_prompt",
+    "PEPE_GENERATING": "pepe_generating",
+    "PEPE_RESULT": "pepe_result",
+    "LANDWOLF_PROMPT": "landwolf_prompt",
+    "LANDWOLF_GENERATING": "landwolf_generating",
+    "LANDWOLF_RESULT": "landwolf_result",
+    "ANDY_PROMPT": "andy_prompt",
+    "ANDY_GENERATING": "andy_generating",
+    "ANDY_RESULT": "andy_result",
+    "BRETT_PROMPT": "brett_prompt",
+    "BRETT_GENERATING": "brett_generating",
+    "BRETT_RESULT": "brett_result"
 }
 
 # Session State Keys
@@ -102,7 +133,17 @@ SESSION_KEYS = {
     "CURRENT_PROMPT": "current_prompt",
     "API_KEY": "api_key",
     "IMAGE_HISTORY": "image_history",
-    "REFERENCE_IMAGES": "reference_images"
+    "REFERENCE_IMAGES": "reference_images",
+    "POLLY_REFERENCE_IMAGES": "polly_reference_images",
+    "ABSTER_REFERENCE_IMAGES": "abster_reference_images",
+    "GOONER_REFERENCE_IMAGES": "gooner_reference_images",
+    "RETSBA_REFERENCE_IMAGES": "retsba_reference_images",
+    "BEARY_REFERENCE_IMAGES": "beary_reference_images",
+    "GOD_REFERENCE_IMAGES": "god_reference_images",
+    "PEPE_REFERENCE_IMAGES": "pepe_reference_images",
+    "LANDWOLF_REFERENCE_IMAGES": "landwolf_reference_images",
+    "ANDY_REFERENCE_IMAGES": "andy_reference_images",
+    "BRETT_REFERENCE_IMAGES": "brett_reference_images"
 }
 
 # UI Text Constants
@@ -110,8 +151,107 @@ UI_TEXT = {
     "LANDING": {
         "title": "🌌 ALF Abstractor",
         "subtitle": "The Surreal Image Generator for the Abstract Blockchain",
-        "enter_button": "🌀 Enter the Abstractor",
+        "friends_button": "🐊👫 ALF and Friends",
+        "enter_button": "🌀 Solo ALF Images",
         "footer": "You do not summon ALF. He allows himself to be seen."
+    },
+    "FRIENDS": {
+        "title": "🐊👫 ALF and Friends",
+        "subtitle": "Choose a friend to join ALF in his digital adventures",
+        "description": "Select one of ALF's companions for your image generation...",
+        "back_button": "🔙 Back to Landing",
+        "solo_button": "🌀 Solo ALF Images",
+        "clear_button": "🔄 Clear Selection"
+    },
+    "POLLY": {
+        "title": "🐊🐧 ALF & Polly Adventures",
+        "subtitle": "Create magical adventures with ALF and his penguin friend Polly",
+        "description": "Describe the magical adventure ALF and Polly will share...",
+        "generate_button": "🌟 Generate ALF & Polly Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Adventure",
+        "mix_button": "🌀 Mix Adventure"
+    },
+    "ABSTER": {
+        "title": "🐊🐧 ALF & Abster Abstract Adventures",
+        "subtitle": "Create abstract adventures with ALF and Abster the Green Penguin of Abstract",
+        "description": "Describe the abstract adventure ALF and Abster will create...",
+        "generate_button": "🌟 Generate ALF & Abster Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Abstract Adventure",
+        "mix_button": "🌀 Mix Abstract Adventure"
+    },
+    "GOONER": {
+        "title": "🐊🐧 ALF & GOONER Blue Adventures",
+        "subtitle": "Create blue adventures with ALF and GOONER the bluest Penguin there is",
+        "description": "Describe the blue adventure ALF and GOONER will experience...",
+        "generate_button": "🌟 Generate ALF & GOONER Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Blue Adventure",
+        "mix_button": "🌀 Mix Blue Adventure"
+    },
+    "RETSBA": {
+        "title": "🐊🐧 ALF & Retsba Villainous Adventures",
+        "subtitle": "Create villainous adventures with ALF and Retsba the villain of Abstract",
+        "description": "Describe the villainous adventure ALF and Retsba will encounter...",
+        "generate_button": "🌟 Generate ALF & Retsba Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Villainous Adventure",
+        "mix_button": "🌀 Mix Villainous Adventure"
+    },
+    "BEARY": {
+        "title": "🐊🐻 ALF & Beary Prankster Adventures",
+        "subtitle": "Create comedy adventures with ALF and Beary the number 1 prankster in abstract chain",
+        "description": "Describe the prankster adventure ALF and Beary will create...",
+        "generate_button": "🌟 Generate ALF & Beary Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Comedy Adventure",
+        "mix_button": "🌀 Mix Comedy Adventure"
+    },
+    "GOD": {
+        "title": "🐊🐕 ALF & GOD Dyslexic Adventures",
+        "subtitle": "Create golden adventures with ALF and GOD the Dyslexic Dog in Abstract",
+        "description": "Describe the dyslexic adventure ALF and GOD will experience...",
+        "generate_button": "🌟 Generate ALF & GOD Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Dyslexic Adventure",
+        "mix_button": "🌀 Mix Dyslexic Adventure"
+    },
+    "PEPE": {
+        "title": "🐊🐸 ALF & Pepe Crypto Meme Adventures",
+        "subtitle": "Create legendary crypto meme adventures with ALF and Pepe the leading meme character",
+        "description": "Describe the crypto meme adventure ALF and Pepe will create...",
+        "generate_button": "🌟 Generate ALF & Pepe Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Crypto Adventure",
+        "mix_button": "🌀 Mix Meme Adventure"
+    },
+    "LANDWOLF": {
+        "title": "🐊🐺 ALF & Landwolf Pack Adventures",
+        "subtitle": "Create wild pack adventures with ALF and Landwolf the hairy wolf crypto legend",
+        "description": "Describe the hairy wolf crypto adventure ALF and Landwolf will create...",
+        "generate_button": "🌟 Generate ALF & Landwolf Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Pack Adventure",
+        "mix_button": "🌀 Mix Wolf Adventure"
+    },
+    "ANDY": {
+        "title": "🐊🟡 ALF & Andy Sunshine Adventures",
+        "subtitle": "Create radiant sunshine adventures with ALF and Andy the yellow guy crypto legend",
+        "description": "Describe the bright yellow crypto adventure ALF and Andy will create...",
+        "generate_button": "🌟 Generate ALF & Andy Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Sunshine Adventure",
+        "mix_button": "🌀 Mix Yellow Adventure"
+    },
+    "BRETT": {
+        "title": "🐊🔵 ALF & Brett Ocean Adventures",
+        "subtitle": "Create strategic ocean adventures with ALF and Brett the blue guy crypto legend",
+        "description": "Describe the deep blue crypto adventure ALF and Brett will create...",
+        "generate_button": "🌟 Generate ALF & Brett Adventure",
+        "back_button": "🔙 Back to Friends",
+        "random_button": "🎲 Random Ocean Adventure",
+        "mix_button": "🌀 Mix Blue Adventure"
     },
     "PROMPT": {
         "title": "🧿 What Will ALF Become?",
