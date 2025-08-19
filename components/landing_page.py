@@ -36,20 +36,10 @@ def render_landing_page():
         # Spacing
         st.markdown("<br>", unsafe_allow_html=True)
         
-        # Navigation buttons
-        col_a, col_b = st.columns(2)
-        
-        with col_a:
-            # ALF and Friends button
-            if st.button(UI_TEXT["LANDING"]["friends_button"], key="friends_btn"):
-                SessionManager.navigate_to_friends()
-                st.rerun()
-        
-        with col_b:
-            # Solo ALF Images button
-            if st.button(UI_TEXT["LANDING"]["enter_button"], key="enter_btn"):
-                SessionManager.navigate_to_prompt()
-                st.rerun()
+        # Enter button with mystical styling
+        if st.button(UI_TEXT["LANDING"]["enter_button"], key="enter_btn"):
+            SessionManager.navigate_to_prompt()
+            st.rerun()
         
         # Bottom mystical text
         st.markdown("<br><br>", unsafe_allow_html=True)
